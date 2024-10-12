@@ -1,0 +1,149 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/anushka/Desktop/VeriPharma/contracts/DrugTracking.sol": {
+      "lastModificationDate": 1728767042655,
+      "contentHash": "5a18840e56d4108b0428f0505f55c068",
+      "sourceName": "contracts/DrugTracking.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "DrugTracking"
+      ]
+    },
+    "/Users/anushka/Desktop/VeriPharma/contracts/DrugVerification.sol": {
+      "lastModificationDate": 1728767042655,
+      "contentHash": "29f9ca23cd00069a01e946181089ab1f",
+      "sourceName": "contracts/DrugVerification.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "DrugVerification"
+      ]
+    },
+    "/Users/anushka/Desktop/VeriPharma/contracts/EventLogging.sol": {
+      "lastModificationDate": 1728767042656,
+      "contentHash": "8a2ed93e535c1678e470177736e94445",
+      "sourceName": "contracts/EventLogging.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "EventLogging"
+      ]
+    },
+    "/Users/anushka/Desktop/VeriPharma/contracts/Registration.sol": {
+      "lastModificationDate": 1728767042656,
+      "contentHash": "cc21a7cb154e411ece5435add1530633",
+      "sourceName": "contracts/Registration.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Registration"
+      ]
+    }
+  }
+}
