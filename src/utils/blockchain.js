@@ -1198,3 +1198,48 @@ function displayDrugDetails(details) {
         <p>Supply Number: ${supplyNumber}</p>
     `;
 }
+
+//Should be boolean
+export async function isOwner(serialNumber) {
+  const signer = await connectToMetaMask();
+  if (!signer) return;
+
+  // Get contract instance with signer
+  const contract = new ethers.Contract(drugTrackingAddress, drugTrackingABI, signer);
+
+  try {
+      // Call the isOwner function to check ownership
+      const ownerStatus = await contract.isOwner(serialNumber);
+      console.log(`Ownership status for drug ${serialNumber}:`, ownerStatus);
+
+      // Inform the user if they are the owner
+      if (ownerStatus) {
+          alert(`You are the owner of the drug with serial number: ${serialNumber}`);
+      } else {
+          alert(`You are NOT the owner of the drug with serial number: ${serialNumber}`);
+      }
+
+      return ownerStatus;
+  } catch (error) {
+      console.error("Error checking ownership:", error);
+  }
+}
+
+//Mark drug as faulty --> Entire batch is faulty
+export async function markDrugFaulty(serialNumber) {
+  const signer = await connectToMetaMask();
+  if (!signer) return;
+
+  // Get contract instance with signer
+  const contract = new ethers.Contract(drugTrackingAddress, drugTrackingABI, signer);
+
+  try {
+      // Send transaction to mark the drug (and batch) faulty
+      const tx = await contract.markDrugFaulty(serialNumber);
+      await tx.wait();  // Wait for transaction confirmation
+
+      alert(`Drug and its batch marked as faulty: ${serialNumber}`);
+  } catch (error) {
+      console.error("Error marking drug faulty:", error);
+  }
+}
