@@ -65,6 +65,9 @@
                     <input type="password" id="client-confirm-password" name="confirm-password" required>
                     <label for="insurance-carrier">Insurance Carrier</label>
                     <input type="text" id="insurance-carrier" name="insurance-carrier" required>
+                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
+                    <p id="wallet-address"></p>
+                    <input type="hidden" id="wallet" name="wallet">
                     <p id="client-error-message" class="error-message"></p>
                     <button type="submit">Create Account</button>
                 </form>
@@ -97,6 +100,9 @@
                     <input type="text" id="business-license" name="business-license">
                     <label for="industry">Industry or Product Category</label>
                     <input type="text" id="industry" name="industry" required>
+                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
+                    <p id="wallet-address"></p>
+                    <input type="hidden" id="wallet" name="wallet">
                     <button type="submit">Create Account</button>
                 </form>
 
@@ -141,6 +147,9 @@
                     <textarea id="certifications" name="certifications" rows="3" placeholder="List any relevant industry certifications"></textarea>
                     <label for="supply-chain-partners">Supply Chain Partners (Optional)</label>
                     <textarea id="supply-chain-partners" name="supply-chain-partners" rows="3" placeholder="List your key supply chain partners"></textarea>
+                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
+                    <p id="wallet-address"></p>
+                    <input type="hidden" id="wallet" name="wallet">
                     <p id="mf-error-message" class="error-message"></p>
                     <button type="submit">Create Account</button>
                 </form>
@@ -194,7 +203,23 @@
             validatePassword(retailerForm, 'retailer-password', 'retailer-confirm-password', 'retailer-error-message');
             validatePassword(manufacturerForm, 'mf-password', 'mf-confirm-password', 'mf-error-message');
 
-            
+            async function connectWallet() {
+                if (typeof window.ethereum !== 'undefined') {
+                    try {
+                    // Request account access if needed
+                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        const account = accounts[0]; // Get the first account
+                        document.getElementById('wallet-address').textContent = "Connected Wallet Address: " + account;
+                        document.getElementById('wallet').value = account; // Store wallet address in hidden input
+                    } catch (error) {
+                        console.error("User rejected the connection or there was an error");
+                    }
+                } else {
+                    alert("MetaMask is not installed. Please install it to use this feature.");
+                }
+            }
+
+            document.getElementById('connect-wallet').addEventListener('click', connectWallet);
         
             forms.forEach(form => {
                 form.addEventListener('submit', function(event) {
