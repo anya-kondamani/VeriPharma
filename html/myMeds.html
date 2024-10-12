@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/theme.css">
+        <link rel="stylesheet" href="styles/myMeds.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="homePage.html">Look Up</a></li>
+                <li><a href="myMeds.html">My Products</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">My Profile</a>
+                    <div class="dropdown-content">
+                        <a href="profile.html">View Profile</a>
+                        <a href="User.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="products-container">
+            <h2>My Products</h2>
+            <ul id="productList">
+                <!-- Products will be listed here -->
+            </ul>
+        </div>
+    
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let products = JSON.parse(localStorage.getItem('products')) || [];
+                const productList = document.getElementById('productList');
+                
+                if (products.length > 0) {
+                    products.forEach(product => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = product;
+                        productList.appendChild(listItem);
+                    });
+                } else {
+                    productList.textContent = 'No products added yet.';
+                }
+            });
+        </script>
+        <script src="" async defer></script>
+    </body>
+</html>

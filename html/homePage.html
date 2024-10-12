@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/theme.css">
+        <link rel="stylesheet" href="styles/homePage.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="homePage.html">Look Up</a></li>
+                <li><a href="myMeds.html">My Products</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">My Profile</a>
+                    <div class="dropdown-content">
+                        <a href="profile.html">View Profile</a>
+                        <a href="User.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="form-container">
+            <div class="form">
+            <form id="userForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="input1">First Input:</label>
+                    <input type="text" id="input1" name="input1" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="input2">Second Input:</label>
+                    <input type="text" id="input2" name="input2" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="fileInput">Upload a File:</label>
+                    <input type="file" id="fileInput" name="fileInput" required>
+                    
+                    <div id="fileDisplay" class="file-display hidden">
+                        <span id="fileName"></span>
+                        <span class="file-icon">📄</span>
+                    </div>
+                    <div id="noFileMessage" class="no-file-message">No file chosen</div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit">Submit</button>
+                </div>
+                
+                <div id="outputArea" class="output-area">
+                <h3>Search Results</h3>
+                <div id="searchResult">No result yet</div>
+                <button id="addToProducts" class="hidden">Add to My Products</button>
+                </div>
+            </form>
+            
+            </div>
+        </div>
+
+        
+
+        <script>
+            document.getElementById('userForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const input1 = document.getElementById('input1').value.trim(); // Trim whitespace
+                const input2 = document.getElementById('input2').value.trim(); // Trim whitespace
+                const fileInput = document.getElementById('fileInput').files[0];
+        
+                // Check if at least one input is filled
+                if (input1 || input2 || fileInput) {
+                    alert('Form Submitted Successfully');
+                    // You can handle the form data or send it to a server here
+                } else {
+                    alert('Please fill at least one field or select a file.');
+                }
+            });
+            document.getElementById('fileInput').addEventListener('change', function() {
+                const file = this.files[0];
+                const fileDisplay = document.getElementById('fileDisplay');
+                const fileNameElement = document.getElementById('fileName');
+
+                if (file) {
+                    // Display the file name and show the file display container
+                    fileNameElement.textContent = file.name;
+                    fileDisplay.classList.remove('hidden');
+                } else {
+                    // Hide the file display if no file is selected
+                    fileDisplay.classList.add('hidden');
+                }
+            });
+            
+
+            document.getElementById('addToProducts').addEventListener('click', function() {
+                const result = document.getElementById('searchResult').textContent;
+                let products = JSON.parse(localStorage.getItem('products')) || [];
+                products.push(result);
+                localStorage.setItem('products', JSON.stringify(products));
+                alert('Product added to My Products!');
+            });
+        </script>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+    </body>
+</html>
