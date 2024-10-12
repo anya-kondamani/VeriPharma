@@ -1031,16 +1031,18 @@ export async function connectToMetaMask() {
 
 
 
-// Register a new stakeholder using the Registration contract
-async function registerStakeholder(address, role) {
+export async function registerStakeholder(role) {
     const signer = await connectToMetaMask();
     if (!signer) return;
 
     const registrationContract = new ethers.Contract(registrationAddress, registrationABI, signer);
+    const userAddress = await signer.getAddress();  // Get connected account address
+
     try {
-        const tx = await registrationContract.registerStakeholder(address, role);
-        await tx.wait();
-        console.log("Stakeholder registered successfully!");
+        // Trigger MetaMask popup to sign the transaction
+        const tx = await registrationContract.registerStakeholder(userAddress, role);
+        await tx.wait();  // Wait for the transaction to be mined
+        alert("Stakeholder registered successfully!");
     } catch (error) {
         console.error("Error registering stakeholder:", error);
     }

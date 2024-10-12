@@ -1,15 +1,31 @@
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+require('dotenv').config();
+
 module.exports = {
   networks: {
-    development: {
-      host: "127.0.0.1",     // Localhost (default: none)
-      port: 8545,            // Ganache port (default: none)
-      network_id: "*",       // Any network (default: none)
+    sepolia: {
+      provider: () => new HDWalletProvider(
+        process.env.PRIVATE_KEY, 
+        `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}`
+      ),
+      network_id: 11155111,
+      gas: 2000000,               // Reduced gas limit
+      gasPrice: 1000000000,       // Reduced gas price to 1 Gwei
+      confirmations: 1,
+      timeoutBlocks: 200,         // Reduced timeout blocks
+      skipDryRun: true,
+      networkCheckTimeout: 1000000
     },
   },
-  // Compiler configuration
   compilers: {
     solc: {
-      version: "0.8.0",      // Specify Solidity compiler version
+      version: "0.8.0",
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 200
+        }
+      }
     }
   }
 };
