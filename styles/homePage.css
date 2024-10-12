@@ -1,0 +1,136 @@
+html,body {
+    background-color: var(--primary-color);
+}
+body {
+    margin: 0;
+    padding: 20px;
+    height: 100vh; 
+  }
+nav {
+    display: flex;
+    justify-content: flex-end; 
+    background-color: var(--background-color);
+    padding:10px;
+}
+  
+  nav ul {
+    list-style-type: none;
+  }
+  
+  nav ul li {
+    float: left;
+    position: relative;
+    margin-right: 20px; 
+}
+  nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 18px; /* Change text size */
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1 {
+    color: var(--primary-color);
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+  }
+.form-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 50px;
+}
+.form {
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: auto; 
+    width: 700px;
+    padding: 40px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    padding: 10px;
+}
+.output-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    padding: 10px;
+}
+.file-display {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ddd; /* Border for the rectangle */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+}
+
+.file-icon {
+    margin-right: 10px; /* Spacing between icon and file name */
+}
+
+.hidden {
+    display: none; 
+}
+input[type="file"] {
+    position: relative; /* Establish a positioning context */
+    overflow: hidden; /* Prevent any overflow */
+    height: 0; /* Make the height of the input zero */
+    opacity: 0; /* Make the input transparent */
+}
+
+/* Custom styles for the file input label, if needed */
+.file-input-label {
+    display: inline-block; /* Allow for spacing around the label */
+    padding: 10px 15px; /* Add padding for aesthetics */
+    border: 1px solid #ddd; /* Border for the file input */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    cursor: pointer; /* Change cursor to pointer for usability */
+}
+
+.no-file-message {
+    margin-top: 5px; /* Space between the file input and the message */
+    color: #999; 
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 0;
+  }
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+
+  }
+ 
+  
+  
