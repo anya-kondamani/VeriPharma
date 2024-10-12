@@ -10,22 +10,14 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles/theme.css">
-        <link rel="stylesheet" href="styles/homePage.css">
+        <link rel="stylesheet" href="/styles/theme.css">
+        <link rel="stylesheet" href="/styles/homePage.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
     </head>
     <body>
         <nav>
-            <ul>
-                <li><a href="homePage.html">Look Up</a></li>
-                <li><a href="myMeds.html">My Products</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">My Profile</a>
-                    <div class="dropdown-content">
-                        <a href="profile.html">View Profile</a>
-                        <a href="User.html">Logout</a>
-                    </div>
-                </li>
+            <ul id="navbar">
+                <!-- Navbar will be dynamically populated based on user type -->
             </ul>
         </nav>
 
@@ -67,9 +59,40 @@
             </div>
         </div>
 
-        
-
         <script>
+            const userType = localStorage.getItem('userType');
+            function generateNavbar() {
+                const navbar = document.getElementById('navbar');
+
+                if (userType === 'client') {
+                    navbar.innerHTML = `
+                        <li><a href="homePage.html">Look Up</a></li>
+                        <li><a href="myMeds.html">My Products</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropbtn">My Profile</a>
+                            <div class="dropdown-content">
+                                <a href="profile.html">View Profile</a>
+                                <a href="User.html">Logout</a>
+                            </div>
+                        </li>
+                `;
+                } else if (userType === 'manufacturer') {
+                    navbar.innerHTML = `
+                        <li><a href="homePage.html">Look Up</a></li>
+                        <li><a href="track.html">Track</a></li>
+                        <li><a href="report.html">Report</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropbtn">My Profile</a>
+                            <div class="dropdown-content">
+                                <a href="profile.html">View Profile</a>
+                                <a href="User.html">Logout</a>
+                            </div>
+                        </li>
+                `;
+                }
+            }
+            generateNavbar();
+
             document.getElementById('userForm').addEventListener('submit', function(event) {
                 event.preventDefault();
                 const input1 = document.getElementById('input1').value.trim(); // Trim whitespace
