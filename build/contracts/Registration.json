@@ -37,7 +37,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -66,7 +67,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -108,7 +110,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -127,7 +130,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -140,7 +144,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"stakeholder\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"role\",\"type\":\"string\"}],\"name\":\"StakeholderRegistered\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stakeholderAddress\",\"type\":\"address\"}],\"name\":\"getStakeholderDetails\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"role\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"registered\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getStakeholders\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stakeholderAddress\",\"type\":\"address\"}],\"name\":\"isRegistered\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stakeholderAddress\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_role\",\"type\":\"string\"}],\"name\":\"registerStakeholder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"stakeholderList\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"stakeholders\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"stakeholderAddress\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"role\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"isRegistered\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Registration.sol\":\"Registration\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Registration.sol\":{\"keccak256\":\"0x39546cba828834cc827053784b8fb785ab4984cee5c23de82436cfafd1433cad\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2cb30c610a1f21c2d430df440ace19a413dc87aea0d771e44a4a729d3f1d04e4\",\"dweb:/ipfs/QmP6qt9SSS3nxwwgF4CABFv31Abj2CbZEZzZ58dXdKwT85\"]}},\"version\":1}",
@@ -10150,9 +10155,17 @@
     "name": "solc",
     "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "1728740431247": {
+      "events": {},
+      "links": {},
+      "address": "0x6e13c3dC45083a4C838421a1F684c37949a4D082",
+      "transactionHash": "0x38d244306b46e270c5f2b00b2a5b71f81f63ce0830a186836bb71fa8d4029e54"
+    }
+  },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-10-12T13:25:32.926Z",
+  "updatedAt": "2024-10-12T14:07:49.934Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

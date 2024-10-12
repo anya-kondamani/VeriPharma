@@ -91,7 +91,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -170,7 +171,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"batchOrSerialId\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"eventType\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"eventOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"details\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"supplyNumber\",\"type\":\"uint256\"}],\"name\":\"EventLogged\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"eventsLog\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"batchOrSerialId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"eventType\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"eventOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"details\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"supplyNumber\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_batchOrSerialId\",\"type\":\"string\"}],\"name\":\"getEvents\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"batchOrSerialId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"eventType\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"eventOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"details\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"supplyNumber\",\"type\":\"uint256\"}],\"internalType\":\"struct EventLogging.Event[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_batchOrSerialId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_eventType\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_details\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_supplyNumber\",\"type\":\"uint256\"}],\"name\":\"logEvent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/EventLogging.sol\":\"EventLogging\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/EventLogging.sol\":{\"keccak256\":\"0xd9478be139fb16d763aa0a694ff478e54d86e237d0903a25cbd830a96be4b870\",\"license\":\"MIT.\",\"urls\":[\"bzz-raw://51e2edbfe89a563f77aacdf5201aee2505bd68bbd1ae8878b26d915149266b66\",\"dweb:/ipfs/QmNmEfDmxWujefKjQyYR3s41wTbus7EMvnNAugBokhfBad\"]}},\"version\":1}",
@@ -8638,9 +8640,23 @@
     "name": "solc",
     "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x08ccE636Fff3ADA19D74751FDe809F4A11FFC8b9",
+      "transactionHash": "0xd31d9cac9706f4177154824536b964365145a1a089d654526526ed80fe7c907a"
+    },
+    "1728740431247": {
+      "events": {},
+      "links": {},
+      "address": "0x6E5181fd4dd6cd9a2C1A95917dc57E80f1a65636",
+      "transactionHash": "0xdfa00cb62baec35f9717242f61eea1592838ed739ac0e54e5cf7584a4ad35c9b"
+    }
+  },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-10-12T13:25:32.923Z",
+  "updatedAt": "2024-10-12T14:07:49.954Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
