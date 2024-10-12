@@ -48,10 +48,10 @@ contract Registration {
         emit StakeholderRegistered(_stakeholderAddress, _role);
     }
 
-    function getStakeholderDetails(address _stakeholderAddress) public view returns (string memory role, bool isRegistered) {
-        require(stakeholders[_stakeholderAddress].isRegistered, "Stakeholder not found");
-        return (stakeholders[_stakeholderAddress].role, stakeholders[_stakeholderAddress].isRegistered);
-    }
+   function getStakeholderDetails(address _stakeholderAddress) public view returns (string memory role, bool registered) {
+    require(stakeholders[_stakeholderAddress].isRegistered, "Stakeholder not found");
+    return (stakeholders[_stakeholderAddress].role, stakeholders[_stakeholderAddress].isRegistered);
+}
 
     function isRegistered(address _stakeholderAddress) public view returns (bool) {
         return stakeholders[_stakeholderAddress].isRegistered;

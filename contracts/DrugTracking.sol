@@ -37,7 +37,7 @@ contract DrugTracking {
     }
 
     modifier onlyOwner(string memory _serialNumber) {
-        require(drugs[_serialNumber].currentOwner == msg.sender, "Not the current ownner");
+        require(drugs[_serialNumber].currentOwner == msg.sender, "Not the current owner");
         _;
     }
 
@@ -65,18 +65,18 @@ contract DrugTracking {
         emit BatchCreated(_batchId, msg.sender, _supplyNumber);
     }
 
-
     function createDrug(
-    string memory _serialNumber,
-    string memory _batchId
+        string memory _serialNumber,
+        string memory _batchId
     ) public onlyBatchExists(_batchId) {
         require(drugs[_serialNumber].currentOwner == address(0), "Drug already exists");
 
+        address[] memory emptyArray;
         drugs[_serialNumber] = Drug({
             serialNumber: _serialNumber,
             batchId: _batchId,
             currentOwner: msg.sender,
-            previousOwners: new address[](),
+            previousOwners: emptyArray,
             isVerified: false
         });
         batchToDrugs[_batchId].push(_serialNumber);
@@ -85,15 +85,15 @@ contract DrugTracking {
     }
 
     function transferDrug(string memory _serialNumber, address _newOwner, uint _supplyNumber) public onlyOwner(_serialNumber) {
-        Drug memory drug = drugs[_serialNumber];
+        Drug storage drug = drugs[_serialNumber];
         Batch memory batch = batches[drug.batchId];
 
         if (batch.supplyNumber != _supplyNumber) {
             emit SupplyNumberAlert(drug.batchId, _supplyNumber);
             return;
         }
-        drugs[_serialNumber].previousOwners.push(drugs[_serialNumber].currentOwner);
-        drugs[_serialNumber].currentOwner = _newOwner;
+        drug.previousOwners.push(drug.currentOwner);
+        drug.currentOwner = _newOwner;
         drugHistory[_serialNumber].push(_newOwner);
 
         emit DrugTransferred(_serialNumber, _newOwner);
@@ -103,7 +103,7 @@ contract DrugTracking {
         batches[_batchId].isFaulty = true;
         emit BatchMarkedFaulty(_batchId);
 
-        for (uint i = 0; i < drugHistory[_batchId].length; i++) {
+        for (uint i = 0; i < batchToDrugs[_batchId].length; i++) {
             string memory drugSerial = batchToDrugs[_batchId][i];
             drugs[drugSerial].isVerified = false; 
         }
