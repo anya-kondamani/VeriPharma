@@ -1,4 +1,4 @@
-const { ethers } = require('ethers');
+const { ethers } = ('ethers');
 
 // Set up contract ABIs and deployed addresses
 const drugTrackingABI = [
@@ -1002,7 +1002,7 @@ async function connectToMetaMask() {
         alert("Please install MetaMask to interact with this dApp.");
     }
 }
-*/
+
 
 async function connectToMetaMask() {
     if (window.ethereum) {
@@ -1014,39 +1014,22 @@ async function connectToMetaMask() {
         console.log("MetaMask is not installed");
         return null;
     }
-}
-    */
+}*/
 
-// Interact with the DrugTracking contract
-async function getDrugDetails(serialNumber) {
-    const signer = await connectToMetaMask();
-    if (!signer) return;
 
-    const drugTrackingContract = new ethers.Contract(drugTrackingAddress, drugTrackingABI, signer);
-    try {
-        const drugDetails = await drugTrackingContract.getDrugDetails(serialNumber);
-        console.log("Drug Details: ", drugDetails);
-        // You can update the front-end UI with the returned drugDetails
-        displayDrugDetails(drugDetails);
-    } catch (error) {
-        console.error("Error fetching drug details:", error);
+export async function connectToMetaMask() {
+    if (window.ethereum) {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        return signer;
+    } else {
+        console.log("MetaMask is not installed");
+        return null;
     }
 }
 
-// Interact with the EventLogging contract to log an event
-async function logEvent(batchOrSerialId, eventType, details, supplyNumber) {
-    const signer = await connectToMetaMask();
-    if (!signer) return;
 
-    const eventLoggingContract = new ethers.Contract(eventLoggingAddress, eventLoggingABI, signer);
-    try {
-        const tx = await eventLoggingContract.logEvent(batchOrSerialId, eventType, details, supplyNumber);
-        await tx.wait();
-        console.log("Event logged successfully!");
-    } catch (error) {
-        console.error("Error logging event:", error);
-    }
-}
 
 // Register a new stakeholder using the Registration contract
 async function registerStakeholder(address, role) {
