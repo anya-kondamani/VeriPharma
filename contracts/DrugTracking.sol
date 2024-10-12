@@ -76,7 +76,7 @@ contract DrugTracking {
             serialNumber: _serialNumber,
             batchId: _batchId,
             currentOwner: msg.sender,
-            previousOwners: new address ,
+            previousOwners: new address[](),
             isVerified: false
         });
         batchToDrugs[_batchId].push(_serialNumber);
