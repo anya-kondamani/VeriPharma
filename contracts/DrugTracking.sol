@@ -18,6 +18,7 @@ contract DrugTracking {
         address currentOwner;
         address[] previousOwners;
         bool isVerified;
+        bool isAddedbyUser;
     }
 
     mapping(string => Batch) public batches; 
@@ -77,7 +78,8 @@ contract DrugTracking {
             batchId: _batchId,
             currentOwner: msg.sender,
             previousOwners: emptyArray,
-            isVerified: false
+            isVerified: false,
+            isAddedbyUser: false
         });
         batchToDrugs[_batchId].push(_serialNumber);
         drugHistory[_serialNumber].push(msg.sender);
@@ -110,8 +112,8 @@ contract DrugTracking {
     } 
 
     function markDrugFaulty(string memory _serialNumber) public drugExists(_serialNumber) onlyOwner(_serialNumber) {
-        drugs[drugSerial].isVerified = false;
-        markBatchFaulty(drugs[drugSerial].batchId);
+        drugs[_serialNumber].isVerified = false;
+        markBatchFaulty(drugs[_serialNumber].batchId);
     }
 
     function getDrugDetails(string memory _serialNumber) public view drugExists(_serialNumber) returns (

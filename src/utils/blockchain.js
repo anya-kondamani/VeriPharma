@@ -988,7 +988,22 @@ const eventLoggingAddress = "0x6E5181fd4dd6cd9a2C1A95917dc57E80f1a65636";  // Re
 const registrationAddress = "0x6e13c3dC45083a4C838421a1F684c37949a4D082";  // Replace with actual deployed address
 const drugVerificationAddress = "0x94cCAd4e39c8aca6338a88d443F170DeA783F144";  // Replace with actual deployed address
 
-// Connect to MetaMask and return a signer
+/*
+async function connectToMetaMask() {
+    if (window.ethereum) {
+        try {
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const account = accounts[0];
+            document.getElementById("accountDisplay").innerText = `Connected Account: ${account}`;
+        } catch (error) {
+            console.error("User denied MetaMask connection:", error);
+        }
+    } else {
+        alert("Please install MetaMask to interact with this dApp.");
+    }
+}
+*/
+
 async function connectToMetaMask() {
     if (window.ethereum) {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -1000,6 +1015,7 @@ async function connectToMetaMask() {
         return null;
     }
 }
+    */
 
 // Interact with the DrugTracking contract
 async function getDrugDetails(serialNumber) {
@@ -1124,7 +1140,7 @@ export async function getEvents(batchOrSerialId) {
     }
 }
 
-
+//UPDATE THIS TO JUST VIEW
 export async function verifyDrug(serialNumber) {
     const signer = await connectToMetaMask();
     if (!signer) return;

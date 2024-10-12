@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharma dApp</title>
+</head>
+<body>
+    <h1>Pharmaceutical Supply Chain dApp</h1>
+
+    <!-- Connect MetaMask Button -->
+    <button id="connectButton">Connect MetaMask</button>
+    <p id="accountDisplay"></p>
+
+    <!-- Include blockchain.js -->
+    <script type="module" src="blockchain.js"></script>
+
+    <script type="module">
+        import { connectToMetaMask } from './blockchain.js';  // Import the function from blockchain.js
+
+        // Add event listener to the connect button
+        document.getElementById("connectButton").addEventListener("click", async () => {
+            await connectToMetaMask();
+        });
+    </script>
+</body>
+</html>
