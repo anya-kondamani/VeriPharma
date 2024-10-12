@@ -109,6 +109,11 @@ contract DrugTracking {
         }
     } 
 
+    function markDrugFaulty(string memory _serialNumber) public drugExists(_serialNumber) onlyOwner(_serialNumber) {
+        drugs[drugSerial].isVerified = false;
+        markBatchFaulty(drugs[drugSerial].batchId);
+    }
+
     function getDrugDetails(string memory _serialNumber) public view drugExists(_serialNumber) returns (
         string memory batchId,
         address currentOwner,
