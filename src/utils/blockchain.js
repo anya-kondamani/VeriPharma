@@ -1125,21 +1125,23 @@ export async function getEvents(batchOrSerialId) {
     }
 }
 
-//UPDATE THIS TO JUST VIEW
 export async function verifyDrug(serialNumber) {
-    const signer = await connectToMetaMask();
-    if (!signer) return;
+  const signer = await connectToMetaMask();
+  if (!signer) return false;
 
-    const contract = new ethers.Contract(drugVerificationAddress, drugVerificationABI, signer);
+  const contract = new ethers.Contract(drugTrackingAddress, drugTrackingABI, signer);
 
-    try {
-        const tx = await contract.verifyDrug(serialNumber);
-        await tx.wait();
-        alert(`Drug verified: ${serialNumber}`);
-    } catch (error) {
-        console.error("Error verifying drug:", error);
-    }
+  try {
+      const tx = await contract.verifyDrug(serialNumber);
+      await tx.wait();
+      console.log(`Drug verified: ${serialNumber}`);
+      return true;  // Return true if verification is successful
+  } catch (error) {
+      console.error("Error verifying drug:", error);
+      return false;  // Return false if there is an error
+  }
 }
+
 
 export async function flagDrug(serialNumber) {
     const signer = await connectToMetaMask();
