@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/styles/theme.css">
+        <link rel="stylesheet" href="/styles/logIn.css">
+    </head>
+    <body>
+        <div class="login-container">
+            <h2>Login</h2>
+
+            <label for="user-type">Select User Type</label>
+            <select name="user-type" id="user-type">
+                <option value="client">Client</option>
+                <option value="retailer">Retailer</option>
+                <option value="manufacturer">Manufacturer</option>
+            </select>
+
+            <div class="login-form">
+                <form id="loginForm">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+    
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" checked="checked" name="remember">
+                            <label for="remember">Remember Me?</label>
+                        </div>
+                        <div>
+                            <a href="User.html" class="go-back">Go Back</a>
+                        </div>
+                    </div>
+
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'user' && password === 'pass123') {
+                window.location.href = 'homePage.html'; 
+            } else {
+                alert('Invalid login credentials!');
+            }
+        });
+    </script>
+    
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+    </body>
+</html>

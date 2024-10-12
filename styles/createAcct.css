@@ -1,0 +1,30 @@
+body, html {
+    background-color: var(--background-color);
+}
+body {
+    margin: 0;
+    padding: 20px;
+    height: 100vh; 
+}
+.account-content {
+    padding: 80px;
+}
+.account-info {
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.manufacturer-form {
+    display: flex;
+    flex-direction: column;
+}
+.retailer-form {
+    display: flex;
+    flex-direction: column;
+}
+.client-form {
+    display: flex;
+    flex-direction: column;
+}

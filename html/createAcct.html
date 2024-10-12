@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/styles/theme.css">
+        <link rel="stylesheet" href="/styles/createAcct.css">
+        <style>
+            .loading-message, .result-message {
+                display: none;
+                text-align: center;
+                font-size: 1.2em;
+                margin-top: 10px;
+            }
+            .loading-spinner {
+                display: none;
+                border: 4px solid rgba(0,0,0,0.1);
+                border-left-color: #4CAF50;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="account-content">
+            <div class="account-info">
+                <h2>Create Account</h2>
+                <label for="user-type">Select User Type</label>
+                <select id="user-type" name="user-type" required>
+                    <option value="" disabled selected>Select a type</option>
+                    <option value="client">Client</option>
+                    <option value="retailer">Retailer</option>
+                    <option value="manufacturer">Manufacturer</option>
+                </select>
+
+                <form id="client-form" class="client-form" style="display:none">
+                    <h3>Client Information</h3>
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                    <label for="middle-name">Middle Name</label>
+                    <input type="text" id="middle-name" name="middle-name">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="client-password" name="password" required>
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="client-confirm-password" name="confirm-password" required>
+                    <label for="insurance-carrier">Insurance Carrier</label>
+                    <input type="text" id="insurance-carrier" name="insurance-carrier" required>
+                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
+                    <p id="wallet-address"></p>
+                    <input type="hidden" id="wallet" name="wallet">
+                    <p id="client-error-message" class="error-message"></p>
+                    <button type="submit">Create Account</button>
+                </form>
+
+                <form id="retailer-form" class="retailer-form" style="display:none">
+                    <h3>Retailer Information</h3>
+                    <label for="retailer-name">Retailer Name</label>
+                    <input type="text" id="retailer-name" name="retailer-name" required>
+                    <label for="retailer-username">Username</label>
+                    <input type="text" id="retailer-username" name="retailer-username" required>
+                    <label for="retailer-password">Password</label>
+                    <input type="password" id="retailer-password" name="retailer-password" required>
+                    <label for="confirm-retailer-password">Confirm Password</label>
+                    <input type="password" id="retailer-confirm-password" name="confirm-retailer-password" required>
+                    <p id="retailer-error-message" class="error-message"></p>
+                    <h3>Business Information</h3>
+                    <label for="business-name">Business Name</label>
+                    <input type="text" id="business-name" name="business-name" required>
+                    <label for="business-address">Business Address</label>
+                    <input type="text" id="business-address" name="business-address" required>
+                    <label for="business-phone">Business Phone Number</label>
+                    <input type="tel" id="business-phone" name="business-phone" required>
+                    <label for="business-email">Business Email</label>
+                    <input type="email" id="business-email" name="business-email" required>
+                    <label for="phone-number">Business Phone Number</label>
+                    <input type="tel" id="phone-number" name="phone-number" required>
+                    <label for="tax-id">Tax ID Number</label>
+                    <input type="text" id="tax-id" name="tax-id" required>
+                    <label for="business-license">Business License Number (Optional)</label>
+                    <input type="text" id="business-license" name="business-license">
+                    <label for="industry">Industry or Product Category</label>
+                    <input type="text" id="industry" name="industry" required>
+                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
+                    <p id="wallet-address"></p>
+                    <input type="hidden" id="wallet" name="wallet">
+                    <button type="submit">Create Account</button>
+                </form>
+
+                <form id="manufacturer-form" class="manufacturer-form" style="display:none">
+                    <h3>Manufacturer Information</h3>
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="phone-number">Phone Number</label>
+                    <input type="tel" id="phone-number" name="phone-number" required>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                    <h3>Business Information</h3>
+                    <label for="company-name">Company Name</label>
+                    <input type="text" id="company-name" name="company-name" required>
+                    <label for="company-address">Company Address</label>
+                    <input type="text" id="company-address" name="company-address" required>
+                    <label for="company-phone">Company Phone Number</label>
+                    <input type="tel" id="company-phone" name="company-phone" required>
+                    <label for="company-email">Company Email</label>
+                    <input type="email" id="company-email" name="company-email" required>
+                    <label for="website">Website (Optional)</label>
+                    <input type="url" id="website" name="website">
+                    <label for="tax-id">Tax ID Number</label>
+                    <input type="text" id="tax-id" name="tax-id" required>
+                    <label for="business-license">Business License Number (Optional)</label>
+                    <input type="text" id="business-license" name="business-license">
+                    <label for="product-category">Product Category</label>
+                    <input type="text" id="product-category" name="product-category" required>
+                    <label for="manufacturing-capacity">Manufacturing Capacity (Units per Month)</label>
+                    <input type="number" id="manufacturing-capacity" name="manufacturing-capacity" required>
+                    <label for="raw-materials">Raw Materials Used</label>
+                    <textarea id="raw-materials" name="raw-materials" rows="3" placeholder="List the materials used in manufacturing"></textarea>
+                    <label for="certifications">Certifications (Optional)</label>
+                    <textarea id="certifications" name="certifications" rows="3" placeholder="List any relevant industry certifications"></textarea>
+                    <label for="supply-chain-partners">Supply Chain Partners (Optional)</label>
+                    <textarea id="supply-chain-partners" name="supply-chain-partners" rows="3" placeholder="List your key supply chain partners"></textarea>
+                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
+                    <p id="wallet-address"></p>
+                    <input type="hidden" id="wallet" name="wallet">
+                    <p id="mf-error-message" class="error-message"></p>
+                    <button type="submit">Create Account</button>
+                </form>
+                
+                <div class="loading-spinner" id="loading-spinner"></div>
+                <p class="loading-message" id="loading-message">Processing your request. Please wait...</p>
+                <p class="result-message" id="result-message"></p>
+            </div>
+        </div>
+        <script>
+            const userType = document.getElementById('user-type');
+            const clientForm = document.getElementById('client-form');
+            const retailerForm = document.getElementById('retailer-form');
+            const manufacturerForm = document.getElementById('manufacturer-form');
+            const forms = document.querySelectorAll('form');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const loadingMessage = document.getElementById('loading-message');
+            const resultMessage = document.getElementById('result-message');
+
+            userType.addEventListener('change', function() {
+                clientForm.style.display = 'none';
+                retailerForm.style.display = 'none';
+                manufacturerForm.style.display = 'none';
+
+                if (userType.value === 'client') {
+                    clientForm.style.display = 'block';
+                } else if (userType.value === 'retailer') {
+                    retailerForm.style.display = 'block';
+                } else if (userType.value === 'manufacturer') {
+                    manufacturerForm.style.display = 'block';
+                }
+            });
+
+            function validatePassword(form, passwordField, confirmPasswordField, errorField) {
+                form.addEventListener('submit', function(event) {
+                    const password = document.getElementById(passwordField).value;
+                    const confirmPassword = document.getElementById(confirmPasswordField).value;
+                    const errorMessage = document.getElementById(errorField);
+
+                    if (password !== confirmPassword) {
+                        event.preventDefault();
+                        errorMessage.textContent = "Passwords do not match!";
+                        errorMessage.style.color = "red";
+                    } else {
+                        errorMessage.textContent = "";
+                    }
+                });
+            }
+
+            validatePassword(clientForm, 'client-password', 'client-confirm-password', 'client-error-message');
+            validatePassword(retailerForm, 'retailer-password', 'retailer-confirm-password', 'retailer-error-message');
+            validatePassword(manufacturerForm, 'mf-password', 'mf-confirm-password', 'mf-error-message');
+
+            async function connectWallet() {
+                if (typeof window.ethereum !== 'undefined') {
+                    try {
+                    // Request account access if needed
+                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        const account = accounts[0]; // Get the first account
+                        document.getElementById('wallet-address').textContent = "Connected Wallet Address: " + account;
+                        document.getElementById('wallet').value = account; // Store wallet address in hidden input
+                    } catch (error) {
+                        console.error("User rejected the connection or there was an error");
+                    }
+                } else {
+                    alert("MetaMask is not installed. Please install it to use this feature.");
+                }
+            }
+
+            document.getElementById('connect-wallet').addEventListener('click', connectWallet);
+        
+            forms.forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent immediate form submission
+
+                // Check if the form is either the manufacturer or retailer form
+                    if (form.id === 'manufacturer-form' || form.id === 'retailer-form') {
+                    // Show loading spinner and message
+                        loadingSpinner.style.display = 'block';
+                        loadingMessage.style.display = 'block';
+
+                    // Simulate a delay (e.g., 3 seconds) before backend response
+                        setTimeout(() => {
+                        // Hide loading spinner and message
+                        loadingSpinner.style.display = 'none';
+                        loadingMessage.style.display = 'none';
+
+                        // Call backend (simulated here) and receive response
+                        // Replace with actual API call to your LLM backend
+                            simulateBackendResponse().then(response => {
+                                if (response.approved) {
+                                    resultMessage.textContent = "Your account has been approved and created successfully!";
+                                    resultMessage.style.color = 'green';
+                                } else {
+                                    resultMessage.textContent = "Sorry, your account could not be approved.";
+                                    resultMessage.style.color = 'red';
+                                }
+                                resultMessage.style.display = 'block';
+                            });
+                        }, 3000); // 3 second wait time (adjust as needed)
+                    } else {
+                    // For other forms, just show a default submission success message (or handle normally)
+                        resultMessage.textContent = "Your form has been submitted!";
+                        resultMessage.style.color = 'blue';
+                        resultMessage.style.display = 'block';
+                    }
+                });
+            });
+
+        // Simulate backend response for manufacturer or retailer
+            function simulateBackendResponse() {
+                return new Promise((resolve) => {
+                // Simulating success or failure response from backend (replace with actual logic)
+                    const approved = Math.random() > 0.5; // Randomly approve or reject
+                    resolve({ approved });
+                });
+            }
+        </script>
+        <script src="" async defer></script>
+    </body>
+</html>

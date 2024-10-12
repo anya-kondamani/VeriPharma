@@ -1,0 +1,198 @@
+from flask import Flask, request, jsonify
+from supabase import create_client, Client
+import bcrypt
+import requests  # For making HTTP requests to the blockchain verification service
+
+# Supabase configuration
+url = "https://pjmuerlkiilsdnkmvniq.supabase.co"  # Replace with your Supabase URL
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBqbXVlcmxraWlsc2Rua212bmlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg3MDU5MTcsImV4cCI6MjA0NDI4MTkxN30.jAj1z9Vj8VJ1zOBnXdyLGE2Bp0IlTPPkbPILOOz8fhY"  # Replace with your Supabase Anon Key
+
+supabase: Client = create_client(url, key)
+
+app = Flask(__name__)
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    data = request.get_json()
+    first_name = data.get('first_name')
+    middle_name = data.get('middle_name')
+    last_name = data.get('last_name')
+    username = data.get('username')
+    password = data.get('password')
+    confirm_password = data.get('confirm_password')
+    insurance_carrier = data.get('insurance_carrier')
+    wallet_address = data.get('wallet_address')  # This should be provided after wallet connection
+
+    # Validate input data
+    required_fields = [first_name, last_name, username, password, confirm_password, insurance_carrier, wallet_address]
+    if not all(required_fields):
+        return jsonify({'message': 'All fields are required'}), 400
+
+    if password != confirm_password:
+        return jsonify({'message': 'Passwords do not match'}), 400
+
+    # Check if the username or email already exists
+    existing_user = supabase.table('users').select('*').eq('username', username).execute().data
+    if existing_user:
+        return jsonify({'message': 'Username already exists'}), 400
+
+    # Hash the password
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+    # Insert the new user into the Supabase users table
+    response = supabase.table('users').insert({
+        'first_name': first_name,
+        'middle_name': middle_name,
+        'last_name': last_name,
+        'username': username,
+        'email': data.get('email'),  # If email is still required
+        'password_hash': hashed_password.decode('utf-8'),
+        'insurance_carrier': insurance_carrier,
+        'wallet_address': wallet_address
+    }).execute()
+
+    if response.data:
+        return jsonify({'message': 'User created successfully'}), 201
+    else:
+        return jsonify({'message': 'Error creating user', 'details': response.error}), 400
+    
+@app.route('/profile/<int:user_id>', methods=['GET'])
+def get_profile(user_id):
+    user = supabase.table('users').select('first_name', 'middle_name', 'last_name', 'insurance_carrier').eq('user_id', user_id).execute().data
+    if user:
+        return jsonify({'profile': user[0]}), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404
+    
+@app.route('/products/<int:user_id>', methods=['GET'])
+def get_user_products(user_id):
+    products = supabase.table('products').select('*').eq('user_id', user_id).execute().data
+    if products:
+        # For each product, check real-time verification status
+        updated_products = []
+        for product in products:
+            serial_number = product['serial_number']
+            is_verified = check_product_verification(serial_number)
+            status_changed = False  # Initialize status_changed for each product
+
+            if is_verified != product['is_verified']:
+                # Update the is_verified status in the database
+                supabase.table('products').update({'is_verified': is_verified}).eq('product_id', product['product_id']).execute()
+                # Set status_changed to True since the status has changed
+                status_changed = True
+                #ALERT TO FRONTEND A WARNING
+
+            # Update the product dictionary
+            product['is_verified'] = is_verified
+            product['status_changed'] = status_changed  # Assign outside the if block
+            updated_products.append(product)
+
+        return jsonify({'products': updated_products}), 200
+    else:
+        return jsonify({'message': 'No products found for this user'}), 404
+    
+def check_product_verification(serial_number):
+    # Replace the URL and logic with your actual implementation
+    # # For example, make a request to your blockchain verification service
+    # verification_service_url = "https://your-blockchain-service.com/verify"
+    # response = requests.post(verification_service_url, json={'serial_number': serial_number})
+    # if response.status_code == 200:
+    #     data = response.json()
+    #     is_verified = data.get('is_verified', False)
+    #     return is_verified
+    # else:
+    #     # Handle error cases as needed
+    #     return False
+    return False
+
+@app.route('/add_product', methods=['POST'])
+def add_product():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    serial_number = data.get('serial_number')
+    product_name = data.get('product_name')
+
+    if not user_id or not serial_number:
+        return jsonify({'message': 'User ID and serial number are required'}), 400
+
+    # Check if the product already exists for this user
+    existing_product = supabase.table('products').select('*').eq('user_id', user_id).eq('serial_number', serial_number).execute().data
+    if existing_product:
+        return jsonify({'message': 'Product already exists in your list'}), 400
+
+    # Check the initial verification status
+    is_verified = check_product_verification(serial_number)
+
+    # Insert the product into the database
+    response = supabase.table('products').insert({
+        'user_id': user_id,
+        'serial_number': serial_number,
+        'product_name': product_name,
+        'is_verified': is_verified
+    }).execute()
+
+    if response.data:
+        return jsonify({'message': 'Product added successfully', 'is_verified': is_verified}), 201
+    else:
+        return jsonify({'message': 'Error adding product', 'details': response.error}), 400
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    # Fetch user data from Supabase using username
+    user = supabase.table('users').select('*').eq('username', username).execute().data
+
+    if user and bcrypt.checkpw(password.encode('utf-8'), user[0]['password_hash'].encode('utf-8')):
+        return jsonify({'message': 'Login successful', 'user_id': user[0]['user_id']}), 200
+    else:
+        return jsonify({'message': 'Invalid credentials'}), 401
+    
+@app.route('/search_prescription', methods=['POST'])
+def search_prescription():
+    data = request.get_json()
+    prescription_name = data.get('prescription_name')
+    batch_number = data.get('batch_number')
+    barcode_image = data.get('barcode_image')
+
+    # Mock search logic
+    if prescription_name or batch_number or barcode_image:
+        prescription_info = {
+            'name': 'Sample Medicine',
+            'dosage': '500mg',
+            'manufacturer': 'Pharma Inc.'
+        }
+        return jsonify({'prescription_info': prescription_info}), 200
+    else:
+        return jsonify({'message': 'No search criteria provided'}), 400
+
+@app.route('/submit_insurance', methods=['POST'])
+def submit_insurance():
+    data = request.get_json()
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    insurance_provider = data.get('insurance_provider')
+    policy_number = data.get('policy_number')
+    allergies = data.get('allergies')
+    user_id = data.get('user_id')  # Assuming the user ID is sent from the frontend
+
+    # Insert insurance info into Supabase
+    response = supabase.table('insurance_info').insert({
+        'user_id': user_id,
+        'insurance_provider': insurance_provider,
+        'policy_number': policy_number,
+        'allergies': allergies
+    }).execute()
+
+    # Check if the response contains data
+    if response.data:
+        return jsonify({'message': 'Insurance information submitted successfully'}), 201
+    else:
+        return jsonify({'message': 'Error submitting insurance information', 'details': response.error}), 400
+
+# Other routes...
+
+if __name__ == '__main__':
+    app.run(debug=True)
