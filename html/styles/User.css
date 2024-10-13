@@ -1,7 +1,9 @@
 html, body {
-    background-color: var(--accent-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 body {
+    font-family: var(--body-font);
     margin: 0;
     padding: 20px;
     height: 100vh; 
@@ -21,6 +23,7 @@ body {
     width: 400px;
     height:auto;
     padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 button {

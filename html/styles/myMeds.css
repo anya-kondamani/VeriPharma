@@ -1,5 +1,5 @@
 html,body {
-    background-color: var(--primary-color);
+    background-color: var(--background-color);
 }
 body {
   font-family: 'Inter', sans-serif;
@@ -10,7 +10,7 @@ body {
 }
 
 nav {
-  background-color: #4CAF50;
+  background-color: var(--accent-color);
   padding: 1em;
   display: flex;
   justify-content: center;
@@ -38,7 +38,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  background-color: #45a049;
+  background-color: var(--accent-color); 
 }
 
   
@@ -69,5 +69,5 @@ nav ul li a:hover {
 }
 
 .dropdown-content a:hover {
-  background-color: #ddd;
+  background-color: var(--secondary-color); 
 }

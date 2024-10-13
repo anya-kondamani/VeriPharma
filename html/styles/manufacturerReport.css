@@ -1,47 +1,47 @@
-html,body {
-    background-color: var(--primary-color);
+html, body {
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
+
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f4f4f9;
     margin: 0;
     padding: 0;
-    color: #333;
 }
 
 nav {
-    background-color: #4CAF50;
+    background-color: var(--accent-color); 
     padding: 1em;
     display: flex;
     justify-content: center;
-}
-
-nav ul {
+  }
+  
+  nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     gap: 2em;
-}
-
-nav ul li {
+  }
+  
+  nav ul li {
     display: inline;
-}
-
-nav ul li a {
+  }
+  
+  nav ul li a {
     text-decoration: none;
-    color: white;
+    color: var(--background-color);
     font-weight: bold;
     padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-}
+  }
+  
+  nav ul li a:hover {
+    background-color: var(--accent-color);
+  }
 
-nav ul li a:hover {
-    background-color: #45a049;
-}
-
-.dropdown-content {
+  .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -49,26 +49,26 @@ nav ul li a:hover {
     box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
     z-index: 1;
     margin-top: 1em;
-}
-
-.dropdown-content a {
+  }
+  
+  .dropdown-content a {
     color: #333;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-}
-
-.dropdown:hover .dropdown-content {
+  }
+  
+  .dropdown:hover .dropdown-content {
     display: block;
-}
-
-.dropbtn {
-    color: white;
+  }
+  
+  .dropbtn {
+    color: var(--background-color); 
     cursor: pointer;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: var(--secondary-color); 
 }
 
 /* Container for the form */
@@ -85,7 +85,7 @@ nav ul li a:hover {
 .report-container h2 {
     text-align: center;
     margin-bottom: 1em;
-    color: #4CAF50;
+    color: var(--text-color);
     font-size: 1.8em;
 }
 
@@ -98,7 +98,7 @@ nav ul li a:hover {
     font-weight: bold;
     margin-bottom: 0.5em;
     display: block;
-    color: #333;
+    color: var(--text-color);
 }
 
 .form-group input[type="text"],
@@ -114,7 +114,7 @@ nav ul li a:hover {
 
 .form-group input[type="text"]:focus,
 .form-group textarea:focus {
-    border-color: #4CAF50;
+    border-color: var(--accent-color); /* Use accent color for focus */
     outline: none;
 }
 
@@ -125,18 +125,18 @@ textarea {
 button[type="submit"] {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color: var(--secondary-color);
     color: white;
     font-size: 1em;
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--navbar-link-border-radius); /* Use border-radius from theme */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: var(--secondary-color); /* Consider changing to a theme variable */
 }
 
 /* Adjust for smaller screens */

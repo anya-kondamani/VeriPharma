@@ -1,16 +1,17 @@
-html,body {
-    background-color: var(--primary-color);
+html, body {
+    background-color: var(--background-color); 
+    color: var(--text-color);
 }
+
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f4f4f9;
+    background-color: var(--background-color); /* Updated to match your palette */
     margin: 0;
     padding: 0;
-    color: #333;
 }
 
 nav {
-    background-color: #4CAF50;
+    background-color: var(--accent-color); /* Uses your primary color */
     padding: 1em;
     display: flex;
     justify-content: center;
@@ -30,7 +31,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: white;
+    color: var(--background-color);
     font-weight: bold;
     padding: 10px 15px;
     border-radius: 5px;
@@ -38,8 +39,9 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #45a049;
+    background-color: var(--accent-color); 
 }
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -48,27 +50,28 @@ nav ul li a:hover {
     box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
     z-index: 1;
     margin-top: 1em;
-}
-
-.dropdown-content a {
+  }
+  
+  .dropdown-content a {
     color: #333;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-}
-
-.dropdown:hover .dropdown-content {
+  }
+  
+  .dropdown:hover .dropdown-content {
     display: block;
-}
-
-.dropbtn {
+  }
+  
+  .dropbtn {
     color: white;
     cursor: pointer;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
+  }
+  
+  .dropdown-content a:hover {
+    background-color: var(--secondary-color); 
+  }
+  
 
 /* Form container */
 .form-container {
@@ -84,7 +87,7 @@ nav ul li a:hover {
 .form h2 {
     text-align: center;
     margin-bottom: 1em;
-    color: #4CAF50;
+    color: var(--primary-color); /* Use primary color for heading */
     font-size: 1.8em;
 }
 
@@ -97,7 +100,7 @@ nav ul li a:hover {
     font-weight: bold;
     margin-bottom: 0.5em;
     display: block;
-    color: #333;
+    color: var(--text-color); /* Use text color from your palette */
 }
 
 .form-group input[type="text"],
@@ -115,7 +118,7 @@ nav ul li a:hover {
 .form-group input[type="text"]:focus,
 .form-group input[type="date"]:focus,
 .form-group textarea:focus {
-    border-color: #4CAF50;
+    border-color: var(--primary-color); /* Border color changes to primary */
     outline: none;
 }
 
@@ -126,7 +129,7 @@ textarea {
 button[type="submit"] {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color: var(--accent-color); /* Accent color for buttons */
     color: white;
     font-size: 1em;
     font-weight: bold;
@@ -137,7 +140,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: var(--primary-color); /* Button hover color to primary */
 }
 
 /* Adjust for smaller screens */

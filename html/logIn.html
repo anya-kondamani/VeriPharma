@@ -15,10 +15,11 @@
     </head>
     <body>
         <div class="login-container">
-            <h2>Login</h2>
+            <h2>Log In</h2>
 
             <label for="user-type">Select User Type</label>
             <select name="user-type" id="user-type">
+                <option value="" disabled selected>Select a type</option>
                 <option value="client">Client</option>
                 <option value="retailer">Retailer</option>
                 <option value="manufacturer">Manufacturer</option>
@@ -38,7 +39,7 @@
                             <label for="remember">Remember Me?</label>
                         </div>
                         <div>
-                            <a href="User.html" class="go-back">Go Back</a>
+                            <a href="User.html" class="go-back">← Go Back</a>
                         </div>
                     </div>
 
@@ -46,6 +47,8 @@
                 </form>
             </div>
         </div>
+
+        
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
