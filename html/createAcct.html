@@ -221,6 +221,11 @@
                                 if (response.approved) {
                                     resultMessage.textContent = "Your account has been approved and created successfully!";
                                     resultMessage.style.color = 'green';
+                                    if (form.id === 'manufacturer-form') {
+                                        window.location.href = 'manufacturerRegister.html'; 
+                                    } else {
+                                      window.location.href = 'retailerRegister.html'; 
+                                    }
                                 } else {
                                     resultMessage.textContent = "Sorry, your account could not be approved.";
                                     resultMessage.style.color = 'red';
@@ -233,6 +238,8 @@
                         resultMessage.textContent = "Your form has been submitted!";
                         resultMessage.style.color = 'blue';
                         resultMessage.style.display = 'block';
+
+                        window.location.href = 'homePage.html';
                     }
                 });
             });
