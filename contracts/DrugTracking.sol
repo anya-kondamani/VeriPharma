@@ -101,6 +101,13 @@ contract DrugTracking {
         emit DrugTransferred(_serialNumber, _newOwner);
     }
 
+    function isOwner(string memory _serialNumber) public view returns (bool) {    
+        if (drugs[_serialNumber].currentOwner == address(0)) {
+            return false;
+        }     
+        return drugs[_serialNumber].currentOwner == msg.sender;
+    }
+
     function markBatchFaulty(string memory _batchId) public onlyBatchExists(_batchId) {
         batches[_batchId].isFaulty = true;
         emit BatchMarkedFaulty(_batchId);

@@ -9,8 +9,8 @@ module.exports = {
         `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}`
       ),
       network_id: 11155111,
-      gas: 2000000,               // Reduced gas limit
-      gasPrice: 1000000000,       // Reduced gas price to 1 Gwei
+      gas: 5500000,               // Reduced gas limit
+      gasPrice: 2000000000,       // Reduced gas price to 1 Gwei
       confirmations: 1,
       timeoutBlocks: 200,         // Reduced timeout blocks
       skipDryRun: true,

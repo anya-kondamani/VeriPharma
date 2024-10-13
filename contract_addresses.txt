@@ -1,0 +1,4 @@
+Registration Contract: 0xA1e2c31c5cac1c40c8EC5432e1bf25924B10D2b4
+DrugTracking Contract: 0x906A44927Da9062F9f95f29A28e75fbD74e6792a
+EventLogging Contract: 0x52c5a21fe44caD23C61725a44101077b925519fb
+DrugVerification Contract: 0x07820A69829B71d70c443B8D1604c5DC5fe533E6
