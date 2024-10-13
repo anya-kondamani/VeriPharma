@@ -1,30 +1,116 @@
+
 body, html {
     background-color: var(--background-color);
+    font-family: var(--body-font);
+    color: var(--text-color);
 }
+
 body {
     margin: 0;
     padding: 20px;
-    height: 100vh; 
+    height: 100vh;
 }
+
 .account-content {
     padding: 80px;
 }
+
 .account-info {
     background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Ensures full width on smaller screens */
+    max-width: 600px; /* Limits maximum width */
+    margin: auto; /* Centers the form */
 }
-.manufacturer-form {
-    display: flex;
-    flex-direction: column;
+
+h2, h3 {
+    color: var(--text-color);
+    margin-bottom: 15px; /* Adds space below headings */
 }
-.retailer-form {
-    display: flex;
-    flex-direction: column;
+
+label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: var(--text-color);
 }
-.client-form {
-    display: flex;
-    flex-direction: column;
+
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+select {
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s; /* Smooth border color transition */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    margin-top: 10px; /* Adds space above buttons */
+}
+
+button:hover {
+    background-color: var(--primary-color);
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
+
+.loading-spinner {
+    display: none;
+    border: 4px solid rgba(0,0,0,0.1);
+    border-left-color: #4CAF50;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+.loading-message, .result-message {
+    display: none;
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+    .account-info {
+        padding: 15px; /* Less padding on smaller screens */
+    }
+
+    button {
+        width: 100%; /* Full width buttons */
+    }
 }

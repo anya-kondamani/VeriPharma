@@ -33,7 +33,7 @@
             <div class="form">
             <form id="userForm" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="input1">Product ID #</label>
+                    <label for="input1">Product Serial #</label>
                     <input type="text" id="input1" name="input1" required>
                 </div>
     
@@ -49,7 +49,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <button type="submit">Submit</button>
+                    <button id="verifyButton" type="submit">Verify Product</button>
                 </div>
                 
                 <div id="outputArea" class="output-area">
@@ -63,18 +63,36 @@
         </div>
 
 
-        <script>
-            document.getElementById('userForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const input1 = document.getElementById('input1').value.trim(); 
+        <script type="module">
+            import { verifyDrug } from './src/utils/blockchain.js'; // Correct path to the file
+
+            // Handle form submission
+            document.getElementById('userForm').addEventListener('submit', async function(event) {
+                event.preventDefault(); // Prevent page reload
+
+                const serialNumber = document.getElementById('input1').value.trim(); 
                 const fileInput = document.getElementById('fileInput').files[0];
         
-                if (input1 || fileInput) {
-                    alert('Form Submitted Successfully');
+                // If both fields are filled, verify the drug
+                if (serialNumber || fileInput) {
+                    const result = await verifyDrug(serialNumber); // Call the verifyDrug function
+                    const searchResult = document.getElementById('searchResult');
+                    const addToProductsButton = document.getElementById('addToProducts');
+                    
+                    if (result) {
+                        searchResult.textContent = 'Drug verified successfully';
+                        searchResult.style.color = 'green';
+                        addToProductsButton.classList.remove('hidden'); // Show the button to add product
+                    } else {
+                        searchResult.textContent = 'Failed to verify drug';
+                        searchResult.style.color = 'red';
+                    }
                 } else {
-                    alert('Please fill at least one field or select a file.');
+                    alert('Please provide a serial number or upload a file.');
                 }
             });
+
+            // Handle file input display
             document.getElementById('fileInput').addEventListener('change', function() {
                 const file = this.files[0];
                 const fileDisplay = document.getElementById('fileDisplay');
@@ -89,8 +107,8 @@
                     fileDisplay.classList.add('hidden');
                 }
             });
-            
 
+            // Add product to "My Products" section
             document.getElementById('addToProducts').addEventListener('click', function() {
                 const result = document.getElementById('searchResult').textContent;
                 let products = JSON.parse(localStorage.getItem('products')) || [];

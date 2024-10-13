@@ -48,9 +48,11 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <script>
-            document.getElementById('reportForm').addEventListener('submit', function(event) {
-                event.preventDefault();
+        <script type="module">
+            import { markDrugFaulty } from './src/utils/blockchain.js'; // Import the function
+
+            document.getElementById('reportForm').addEventListener('submit', async function(event) {
+                event.preventDefault(); // Prevent page reload
 
                 const serialOrBatch = document.getElementById('serialOrBatch').value.trim();
                 const problemDetails = document.getElementById('problemDetails').value.trim();
@@ -60,17 +62,26 @@
                     return;
                 }
 
-                alert('Report submitted successfully!');
-                // Here you can send the form data to your server for further processing.
-                console.log({
-                    serialOrBatch,
-                    problemDetails: problemDetails || 'No additional details provided'
-                });
+                try {
+                    // Call the markDrugFaulty function and pass the serial or batch number
+                    await markDrugFaulty(serialOrBatch);
 
-                // Reset the form
-                document.getElementById('reportForm').reset();
+                    // Log the issue details (for potential backend integration)
+                    console.log({
+                        serialOrBatch,
+                        problemDetails: problemDetails || 'No additional details provided'
+                    });
+
+                    // Notify the user of success and reset the form
+                    alert('Report submitted successfully!');
+                    document.getElementById('reportForm').reset();
+                } catch (error) {
+                    console.error('Error submitting report:', error);
+                    alert('There was an issue submitting your report. Please try again.');
+                }
             });
         </script>
+
         <script src="" async defer></script>
     </body>
 </html>
