@@ -226,7 +226,8 @@ async function verifyDrug(serialNumber) {
     await registerStakeholder("RETAILER");
     await registerStakeholder("END_USER");
 
-    // Create a new batch with timestamps
+    // Create a new batch with t
+    imestamps
     await createBatch("batch1", 5, manufactureDate, expirationDate);  // Example dates: manufactureDate and expirationDate
 
     // Create a new drug
