@@ -3,14 +3,20 @@ from supabase import create_client, Client
 import bcrypt
 import requests  # For making HTTP requests to the blockchain verification service
 
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
+
+app = Flask(__name__)
+
+# Configure CORS to allow requests from 'http://localhost:8000'
+CORS(app)
+
+# Rest of your code...
 # Supabase configuration
 url = "https://pjmuerlkiilsdnkmvniq.supabase.co"  # Replace with your Supabase URL
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBqbXVlcmxraWlsc2Rua212bmlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg3MDU5MTcsImV4cCI6MjA0NDI4MTkxN30.jAj1z9Vj8VJ1zOBnXdyLGE2Bp0IlTPPkbPILOOz8fhY"  # Replace with your Supabase Anon Key
 
 supabase: Client = create_client(url, key)
-
-app = Flask(__name__)
-
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()

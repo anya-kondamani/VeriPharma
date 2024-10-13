@@ -1,258 +1,271 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Create an Account</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles/theme.css">
-        <link rel="stylesheet" href="styles/createAcct.css">
-        <style>
-            .loading-message, .result-message {
-                display: none;
-                text-align: center;
-                font-size: 1.2em;
-                margin-top: 10px;
-            }
-            .loading-spinner {
-                display: none;
-                border: 4px solid rgba(0,0,0,0.1);
-                border-left-color: #4CAF50;
-                border-radius: 50%;
-                width: 30px;
-                height: 30px;
-                animation: spin 1s linear infinite;
-            }
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        </style>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <div class="account-content">
-            <div class="account-info">
-                <h2>Create Account</h2>
-                <label for="user-type">Select User Type</label>
-                <select id="user-type" name="user-type" required>
-                    <option value="" disabled selected>Select a type</option>
-                    <option value="client">Client</option>
-                    <option value="retailer">Retailer</option>
-                    <option value="manufacturer">Manufacturer</option>
-                </select>
+<head>
+    <meta charset="utf-8">
+    <title>Create an Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include your CSS styles here or link to your CSS files -->
+    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="styles/createAcct.css">
+    <style>
+        /* Additional styles */
+        .loading-message, .result-message {
+            display: none;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .loading-spinner {
+            display: none;
+            border: 4px solid rgba(0,0,0,0.1);
+            border-left-color: #4CAF50;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="account-content">
+        <div class="account-info">
+            <h2>Create Account</h2>
+            <label for="user-type">Select User Type</label>
+            <select id="user-type" name="user-type" required>
+                <option value="" disabled selected>Select a type</option>
+                <option value="client">Client</option>
+                <option value="retailer">Retailer</option>
+                <option value="manufacturer">Manufacturer</option>
+            </select>
 
-                <form id="client-form" class="client-form" style="display:none">
-                    <h3>Client Information</h3>
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" name="first-name" required>
-                    <label for="middle-name">Middle Name</label>
-                    <input type="text" id="middle-name" name="middle-name">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" name="last-name" required>
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="password">Password</label>
-                    <input type="password" id="client-password" name="password" required>
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="client-confirm-password" name="confirm-password" required>
-                    <label for="insurance-carrier">Insurance Carrier</label>
-                    <input type="text" id="insurance-carrier" name="insurance-carrier" required>
-                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
-                    <p id="wallet-address"></p>
-                    <input type="hidden" id="wallet" name="wallet">
-                    <p id="client-error-message" class="error-message"></p>
-                    <button type="submit">Create Account</button>
-                </form>
+            <!-- Client Form -->
+            <form id="client-form" style="display:none">
+                <h3>Client Information</h3>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first_name" required>
+                <label for="middle-name">Middle Name</label>
+                <input type="text" id="middle-name" name="middle_name">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last_name" required>
+                <label for="client-username">Username</label>
+                <input type="text" id="client-username" name="username" required>
+                <label for="client-password">Password</label>
+                <input type="password" id="client-password" name="password" required>
+                <label for="client-confirm-password">Confirm Password</label>
+                <input type="password" id="client-confirm-password" name="confirm_password" required>
+                <label for="insurance-carrier">Insurance Carrier</label>
+                <input type="text" id="insurance-carrier" name="insurance_carrier" required>
+                <button type="button" class="connect-wallet">Connect Ethereum Wallet</button>
+                <p class="wallet-address"></p>
+                <input type="hidden" class="wallet" name="wallet_address">
+                <p id="client-error-message" class="error-message"></p>
+                <button type="submit">Create Account</button>
+            </form>
 
-                <form id="retailer-form" class="retailer-form" style="display:none">
-                    <h3>Retailer Information</h3>
-                    <label for="retailer-name">Retailer Name</label>
-                    <input type="text" id="retailer-name" name="retailer-name" required>
-                    <label for="retailer-username">Username</label>
-                    <input type="text" id="retailer-username" name="retailer-username" required>
-                    <label for="retailer-password">Password</label>
-                    <input type="password" id="retailer-password" name="retailer-password" required>
-                    <label for="confirm-retailer-password">Confirm Password</label>
-                    <input type="password" id="retailer-confirm-password" name="confirm-retailer-password" required>
-                    <p id="retailer-error-message" class="error-message"></p>
-                    <h3>Business Information</h3>
-                    <label for="business-address">Business Address</label>
-                    <input type="text" id="business-address" name="business-address" required>
-                    <label for="business-phone">Business Phone Number</label>
-                    <input type="tel" id="business-phone" name="business-phone" required>
-                    <label for="business-email">Business Email</label>
-                    <input type="email" id="business-email" name="business-email" required>
-                    <label for="tax-id">Tax ID Number</label>
-                    <input type="text" id="tax-id" name="tax-id" required>
-                    <label for="business-license">Business License Number (Optional)</label>
-                    <input type="text" id="business-license" name="business-license">
-                    <label for="industry">Industry or Product Category (Optional)</label>
-                    <input type="text" id="industry" name="industry">
-                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
-                    <p id="wallet-address"></p>
-                    <input type="hidden" id="wallet" name="wallet">
-                    <button type="submit">Create Account</button>
-                </form>
+            <!-- Retailer Form -->
+            <form id="retailer-form" style="display:none">
+                <h3>Retailer Information</h3>
+                <label for="retailer-name">Retailer Name</label>
+                <input type="text" id="retailer-name" name="retailer_name" required>
+                <label for="retailer-username">Username</label>
+                <input type="text" id="retailer-username" name="username" required>
+                <label for="retailer-password">Password</label>
+                <input type="password" id="retailer-password" name="password" required>
+                <label for="retailer-confirm-password">Confirm Password</label>
+                <input type="password" id="retailer-confirm-password" name="confirm_password" required>
+                <p id="retailer-error-message" class="error-message"></p>
+                <h3>Business Information</h3>
+                <label for="business-address">Business Address</label>
+                <input type="text" id="business-address" name="business_address" required>
+                <label for="business-phone">Business Phone Number</label>
+                <input type="tel" id="business-phone" name="business_phone" required>
+                <label for="business-email">Business Email</label>
+                <input type="email" id="business-email" name="business_email" required>
+                <label for="tax-id">Tax ID Number</label>
+                <input type="text" id="tax-id" name="tax_id" required>
+                <label for="business-license">Business License Number (Optional)</label>
+                <input type="text" id="business-license" name="business_license">
+                <label for="industry">Industry or Product Category (Optional)</label>
+                <input type="text" id="industry" name="industry">
+                <button type="button" class="connect-wallet">Connect Ethereum Wallet</button>
+                <p class="wallet-address"></p>
+                <input type="hidden" class="wallet" name="wallet_address">
+                <button type="submit">Create Account</button>
+            </form>
 
-                <form id="manufacturer-form" class="manufacturer-form" style="display:none">
-                    <h3>Manufacturer Information</h3>
-                    <label for="manufacturer-name">Manufacturer Name</label>
-                    <input type="text" id="manufacturer-name" name="manufacturer-name" required>
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required>
-                    <h3>Business Information</h3>
-                    <label for="company-address">Business Address</label>
-                    <input type="text" id="company-address" name="company-address" required>
-                    <label for="company-phone">Business Phone Number</label>
-                    <input type="tel" id="company-phone" name="company-phone" required>
-                    <label for="company-email">Business Email</label>
-                    <input type="email" id="company-email" name="company-email" required>
-                    <label for="tax-id">Tax ID Number</label>
-                    <input type="text" id="tax-id" name="tax-id" required>
-                    <label for="business-license">Business License Number (Optional)</label>
-                    <input type="text" id="business-license" name="business-license">
-                    <label for="product-category">Product Category (Optional)</label>
-                    <input type="text" id="product-category" name="product-category">
-                    <button type="button" id="connect-wallet">Connect Ethereum Wallet</button>
-                    <p id="wallet-address"></p>
-                    <input type="hidden" id="wallet" name="wallet">
-                    <p id="mf-error-message" class="error-message"></p>
-                    <button type="submit">Create Account</button>
-                </form>
-                
-                <div class="loading-spinner" id="loading-spinner"></div>
-                <p class="loading-message" id="loading-message">Processing your request. Please wait...</p>
-                <p class="result-message" id="result-message"></p>
-            </div>
+            <!-- Manufacturer Form -->
+            <form id="manufacturer-form" style="display:none">
+                <h3>Manufacturer Information</h3>
+                <label for="manufacturer-name">Manufacturer Name</label>
+                <input type="text" id="manufacturer-name" name="manufacturer_name" required>
+                <label for="manufacturer-username">Username</label>
+                <input type="text" id="manufacturer-username" name="username" required>
+                <label for="manufacturer-password">Password</label>
+                <input type="password" id="manufacturer-password" name="password" required>
+                <label for="manufacturer-confirm-password">Confirm Password</label>
+                <input type="password" id="manufacturer-confirm-password" name="confirm_password" required>
+                <p id="manufacturer-error-message" class="error-message"></p>
+                <h3>Business Information</h3>
+                <label for="company-address">Business Address</label>
+                <input type="text" id="company-address" name="company_address" required>
+                <label for="company-phone">Business Phone Number</label>
+                <input type="tel" id="company-phone" name="company_phone" required>
+                <label for="company-email">Business Email</label>
+                <input type="email" id="company-email" name="company_email" required>
+                <label for="tax-id">Tax ID Number</label>
+                <input type="text" id="tax-id" name="tax_id" required>
+                <label for="business-license">Business License Number (Optional)</label>
+                <input type="text" id="business-license" name="business_license">
+                <label for="product-category">Product Category (Optional)</label>
+                <input type="text" id="product-category" name="product_category">
+                <button type="button" class="connect-wallet">Connect Ethereum Wallet</button>
+                <p class="wallet-address"></p>
+                <input type="hidden" class="wallet" name="wallet_address">
+                <button type="submit">Create Account</button>
+            </form>
+
+            <div class="loading-spinner" id="loading-spinner"></div>
+            <p class="loading-message" id="loading-message">Processing your request. Please wait...</p>
+            <p class="result-message" id="result-message"></p>
         </div>
-        <script>
-            const userType = document.getElementById('user-type');
-            const clientForm = document.getElementById('client-form');
-            const retailerForm = document.getElementById('retailer-form');
-            const manufacturerForm = document.getElementById('manufacturer-form');
-            const forms = document.querySelectorAll('form');
-            const loadingSpinner = document.getElementById('loading-spinner');
-            const loadingMessage = document.getElementById('loading-message');
-            const resultMessage = document.getElementById('result-message');
+    </div>
 
-            userType.addEventListener('change', function() {
-                clientForm.style.display = 'none';
-                retailerForm.style.display = 'none';
-                manufacturerForm.style.display = 'none';
+    <script>
+        const userType = document.getElementById('user-type');
+        const clientForm = document.getElementById('client-form');
+        const retailerForm = document.getElementById('retailer-form');
+        const manufacturerForm = document.getElementById('manufacturer-form');
+        const forms = document.querySelectorAll('form');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const loadingMessage = document.getElementById('loading-message');
+        const resultMessage = document.getElementById('result-message');
 
-                if (userType.value === 'client') {
-                    clientForm.style.display = 'block';
-                } else if (userType.value === 'retailer') {
-                    retailerForm.style.display = 'block';
-                } else if (userType.value === 'manufacturer') {
-                    manufacturerForm.style.display = 'block';
+        userType.addEventListener('change', function() {
+            clientForm.style.display = 'none';
+            retailerForm.style.display = 'none';
+            manufacturerForm.style.display = 'none';
+
+            if (userType.value === 'client') {
+                clientForm.style.display = 'block';
+            } else if (userType.value === 'retailer') {
+                retailerForm.style.display = 'block';
+            } else if (userType.value === 'manufacturer') {
+                manufacturerForm.style.display = 'block';
+            }
+        });
+
+        function validatePassword(form, passwordFieldId, confirmPasswordFieldId, errorFieldId) {
+            form.addEventListener('submit', function(event) {
+                const password = document.getElementById(passwordFieldId).value;
+                const confirmPassword = document.getElementById(confirmPasswordFieldId).value;
+                const errorMessage = document.getElementById(errorFieldId);
+
+                if (password !== confirmPassword) {
+                    event.preventDefault();
+                    errorMessage.textContent = "Passwords do not match!";
+                    errorMessage.style.color = "red";
+                } else {
+                    errorMessage.textContent = "";
                 }
             });
+        }
 
-            function validatePassword(form, passwordField, confirmPasswordField, errorField) {
-                form.addEventListener('submit', function(event) {
-                    const password = document.getElementById(passwordField).value;
-                    const confirmPassword = document.getElementById(confirmPasswordField).value;
-                    const errorMessage = document.getElementById(errorField);
+        validatePassword(clientForm, 'client-password', 'client-confirm-password', 'client-error-message');
+        validatePassword(retailerForm, 'retailer-password', 'retailer-confirm-password', 'retailer-error-message');
+        validatePassword(manufacturerForm, 'manufacturer-password', 'manufacturer-confirm-password', 'manufacturer-error-message');
 
-                    if (password !== confirmPassword) {
-                        event.preventDefault();
-                        errorMessage.textContent = "Passwords do not match!";
-                        errorMessage.style.color = "red";
-                    } else {
-                        errorMessage.textContent = "";
-                    }
-                });
-            }
-
-            validatePassword(clientForm, 'client-password', 'client-confirm-password', 'client-error-message');
-            validatePassword(retailerForm, 'retailer-password', 'retailer-confirm-password', 'retailer-error-message');
-            validatePassword(manufacturerForm, 'mf-password', 'mf-confirm-password', 'mf-error-message');
-
-            async function connectWallet() {
+        // Handle wallet connections for all forms
+        const connectWalletButtons = document.querySelectorAll('.connect-wallet');
+        connectWalletButtons.forEach(button => {
+            button.addEventListener('click', async function() {
                 if (typeof window.ethereum !== 'undefined') {
                     try {
-                    // Request account access if needed
+                        // Request account access if needed
                         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                         const account = accounts[0]; // Get the first account
-                        document.getElementById('wallet-address').textContent = "Connected Wallet Address: " + account;
-                        document.getElementById('wallet').value = account; // Store wallet address in hidden input
+
+                        // Find the corresponding wallet address display and input
+                        const form = this.closest('form');
+                        const walletAddressDisplay = form.querySelector('.wallet-address');
+                        const walletInput = form.querySelector('.wallet');
+
+                        walletAddressDisplay.textContent = "Connected Wallet Address: " + account;
+                        walletInput.value = account; // Store wallet address in hidden input
                     } catch (error) {
-                        console.error("User rejected the connection or there was an error");
+                        console.error("User rejected the connection or there was an error:", error);
                     }
                 } else {
                     alert("MetaMask is not installed. Please install it to use this feature.");
                 }
-            }
+            });
+        });
 
-            document.getElementById('connect-wallet').addEventListener('click', connectWallet);
-        
-            forms.forEach(form => {
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevent immediate form submission
+        forms.forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
 
-                // Check if the form is either the manufacturer or retailer form
-                    if (form.id === 'manufacturer-form' || form.id === 'retailer-form') {
-                    // Show loading spinner and message
-                        loadingSpinner.style.display = 'block';
-                        loadingMessage.style.display = 'block';
+                // Determine user type based on form ID
+                let userType;
+                if (form.id === 'client-form') {
+                    userType = 'client';
+                } else if (form.id === 'retailer-form') {
+                    userType = 'retailer';
+                } else if (form.id === 'manufacturer-form') {
+                    userType = 'manufacturer';
+                }
 
-                    // Simulate a delay (e.g., 3 seconds) before backend response
-                        setTimeout(() => {
-                        // Hide loading spinner and message
-                        loadingSpinner.style.display = 'none';
-                        loadingMessage.style.display = 'none';
+                // Collect form data
+                const formData = new FormData(form);
+                const data = {};
 
-                        // Call backend (simulated here) and receive response
-                        // Replace with actual API call to your LLM backend
-                            simulateBackendResponse().then(response => {
-                                if (response.approved) {
-                                    resultMessage.textContent = "Your account has been approved and created successfully!";
-                                    resultMessage.style.color = 'green';
-                                    if (form.id === 'manufacturer-form') {
-                                        window.location.href = 'manufacturerRegister.html'; 
-                                    } else {
-                                      window.location.href = 'retailerRegister.html'; 
-                                    }
-                                } else {
-                                    resultMessage.textContent = "Sorry, your account could not be approved.";
-                                    resultMessage.style.color = 'red';
-                                }
-                                resultMessage.style.display = 'block';
-                            });
-                        }, 3000); // 3 second wait time (adjust as needed)
-                    } else {
-                    // For other forms, just show a default submission success message (or handle normally)
-                        resultMessage.textContent = "Your form has been submitted!";
-                        resultMessage.style.color = 'blue';
-                        resultMessage.style.display = 'block';
+                // Append common fields
+                data['user_type'] = userType;
 
-                        window.location.href = 'homePage.html';
+                // Append form-specific fields
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+
+                // Send data to backend
+                fetch('http://127.0.0.1:5000/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => { throw err; });
                     }
+                    return response.json();
+                })
+                .then(responseData => {
+                    if (responseData.message === 'User created successfully') {
+                        resultMessage.textContent = responseData.message;
+                        resultMessage.style.color = 'green';
+                    } else {
+                        resultMessage.textContent = responseData.message;
+                        resultMessage.style.color = 'red';
+                    }
+                    resultMessage.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultMessage.textContent = 'An error occurred while creating the account.';
+                    resultMessage.style.color = 'red';
+                    resultMessage.style.display = 'block';
                 });
             });
-
-        // Simulate backend response for manufacturer or retailer
-            function simulateBackendResponse() {
-                return new Promise((resolve) => {
-                // Simulating success or failure response from backend (replace with actual logic)
-                    const approved = Math.random() > 0.5; // Randomly approve or reject
-                    resolve({ approved });
-                });
-            }
-        </script>
-        <script src="" async defer></script>
-    </body>
+        });
+    </script>
+</body>
 </html>
