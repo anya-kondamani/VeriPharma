@@ -58,7 +58,7 @@ nav ul li a:hover {
     display: block;
   }
   
-  .dropdown:hover .dropdown-content {
+  .dropdown:hover,.dropdown-content {
     display: block;
   }
   
@@ -69,7 +69,8 @@ nav ul li a:hover {
   
   .dropdown-content a:hover {
     background-color: var(--secondary-color); 
-}
+  }
+  
 /* Container for the form */
 .report-container {
     max-width: 600px;
@@ -80,7 +81,6 @@ nav ul li a:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading style */
 .report-container h2 {
     text-align: center;
     margin-bottom: 1em;

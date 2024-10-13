@@ -59,12 +59,12 @@ nav ul li a:hover {
     display: block;
   }
   
-  .dropdown:hover .dropdown-content {
+  .dropdown:hover, .dropdown-content {
     display: block;
   }
   
   .dropbtn {
-    color: white;
+    color: var(--background-color); 
     cursor: pointer;
   }
   

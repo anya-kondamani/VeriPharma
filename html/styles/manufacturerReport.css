@@ -58,7 +58,7 @@ nav {
     display: block;
   }
   
-  .dropdown:hover .dropdown-content {
+  .dropdown:hover, .dropdown-content {
     display: block;
   }
   
@@ -69,9 +69,9 @@ nav {
   
   .dropdown-content a:hover {
     background-color: var(--secondary-color); 
-}
+  }
+  
 
-/* Container for the form */
 .report-container {
     max-width: 600px;
     margin: 50px auto;
