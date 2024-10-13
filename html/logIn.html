@@ -7,11 +7,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Log In</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/styles/theme.css">
-        <link rel="stylesheet" href="/styles/logIn.css">
+        <link rel="stylesheet" href="styles/theme.css">
+        <link rel="stylesheet" href="styles/logIn.css">
     </head>
     <body>
         <div class="login-container">
@@ -52,9 +52,18 @@
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const userType = document.getElementById('user-type').value;
 
             if (username === 'user' && password === 'pass123') {
-                window.location.href = 'homePage.html'; 
+                if (userType === 'client') {
+                    window.location.href = 'homePage.html';
+                }
+                else if (userType === 'manufacturer') {
+                    window.location.href = 'manufacturerRegister.html';
+                }
+                else if (userType === 'retailer') {
+                    window.location.href = 'retailerRegister.html';
+                }
             } else {
                 alert('Invalid login credentials!');
             }

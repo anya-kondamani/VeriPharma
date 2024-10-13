@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>My Profile</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/manufacturerProfile.css">
+        <link rel="stylesheet" href="styles/theme.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="manufacturerRegister.html">Register Product</a></li>
+                <li><a href="manufacturerReport.html">Report Product</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">My Profile</a>
+                    <div class="dropdown-content">
+                        <a href="manufacturerProfile.html">View Profile</a>
+                        <a href="User.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="profile-container">
+            <h2>Manufacturer Profile</h2>
+            <p><strong>Manufacturer Name:</strong> <span id="profile-manufacturer-name"></span></p>
+            <p><strong>Username:</strong> <span id="profile-username"></span></p>
+            <h3>Business Information</h3>
+            <p><strong>Business Address:</strong> <span id="profile-company-address"></span></p>
+            <p><strong>Business Phone Number:</strong> <span id="profile-company-phone"></span></p>
+            <p><strong>Business Email:</strong> <span id="profile-company-email"></span></p>
+            <p><strong>Tax ID Number:</strong> <span id="profile-tax-id"></span></p>
+            <p><strong>Business License Number:</strong> <span id="profile-business-license"></span></p>
+            <p><strong>Product Category:</strong> <span id="profile-product-category"></span></p>
+            <p><strong>Ethereum Wallet Address:</strong> <span id="profile-wallet-address"></span></p>
+        </div>
+    
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <script>
+            // Assuming this data is stored in localStorage for demonstration
+            document.getElementById('profile-retailer-name').textContent = localStorage.getItem('retailerName') || 'N/A';
+            document.getElementById('profile-username').textContent = localStorage.getItem('retailerUsername') || 'N/A';
+            document.getElementById('profile-business-name').textContent = localStorage.getItem('businessName') || 'N/A';
+            document.getElementById('profile-business-address').textContent = localStorage.getItem('businessAddress') || 'N/A';
+            document.getElementById('profile-business-phone').textContent = localStorage.getItem('businessPhone') || 'N/A';
+            document.getElementById('profile-business-email').textContent = localStorage.getItem('businessEmail') || 'N/A';
+            document.getElementById('profile-tax-id').textContent = localStorage.getItem('taxId') || 'N/A';
+            document.getElementById('profile-business-license').textContent = localStorage.getItem('businessLicense') || 'N/A';
+            document.getElementById('profile-industry').textContent = localStorage.getItem('industry') || 'N/A';
+            document.getElementById('profile-wallet').textContent = localStorage.getItem('walletAddress') || 'N/A';
+        </script>
+        <script src="" async defer></script>
+    </body>
+</html>

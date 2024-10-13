@@ -2,42 +2,45 @@ html,body {
     background-color: var(--primary-color);
 }
 body {
-    margin: 0;
-    padding: 20px;
-  }
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
 nav {
-    display: flex;
-    justify-content: flex-end; 
-    background-color: var(--background-color);
-    padding:10px;
+  background-color: #4CAF50;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
 }
-  
-  nav ul {
-    list-style-type: none;
-  }
-  
-  nav ul li {
-    float: left;
-    position: relative;
-    margin-right: 20px; 
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2em;
 }
-  
-  nav ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: bold;
-    font-size: 18px; /* Change text size */
-    font-family: 'Inter', sans-serif;
-  }
-  
-  h1 {
-    color: var(--primary-color);
-  }
-  
-  p {
-    font-size: 1.2rem;
-    color: var(--text-color);
-  }
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #45a049;
+}
+
   .dropdown-content {
     display: none;
     position: absolute;

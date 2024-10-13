@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Register a Product</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/manufacturerRegister.css">
+        <link rel="stylesheet" href="styles/theme.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="manufacturerRegister.html">Register Product</a></li>
+                <li><a href="manufacturerReport.html">Report Product</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">My Profile</a>
+                    <div class="dropdown-content">
+                        <a href="manufacturerProfile.html">View Profile</a>
+                        <a href="User.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="form-container">
+            <div class="form">
+                <h2>Register Product</h2>
+                <form id="registerProductForm">
+                    <div class="form-group">
+                        <label for="serialNumber">Serial Number:</label>
+                        <input type="text" id="serialNumber" name="serialNumber" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productDetails">Additional Product Details (Optional):</label>
+                        <textarea id="productDetails" name="productDetails" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit">Register Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <script>
+            document.getElementById('registerProductForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const serialNumber = document.getElementById('serialNumber').value;
+                
+
+                if (serialNumber) {
+                    alert('Product Registered Successfully');
+                    // You can handle form data here, like sending it to the server.
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            });
+        </script>
+        <script src="" async defer></script>
+    </body>
+</html>

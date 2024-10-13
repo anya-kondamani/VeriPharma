@@ -7,17 +7,25 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Verify a Product</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/styles/theme.css">
-        <link rel="stylesheet" href="/styles/homePage.css">
+        <link rel="stylesheet" href="styles/theme.css">
+        <link rel="stylesheet" href="styles/homePage.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
     </head>
     <body>
         <nav>
-            <ul id="navbar">
-                <!-- Navbar will be dynamically populated based on user type -->
+            <ul>
+                <li><a href="homePage.html">Verify Product</a></li>
+                <li><a href="myMeds.html">My Products</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">My Profile</a>
+                    <div class="dropdown-content">
+                        <a href="profile.html">View Profile</a>
+                        <a href="User.html">Logout</a>
+                    </div>
+                </li>
             </ul>
         </nav>
 
@@ -25,13 +33,8 @@
             <div class="form">
             <form id="userForm" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="input1">First Input:</label>
+                    <label for="input1">Product ID #</label>
                     <input type="text" id="input1" name="input1" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="input2">Second Input:</label>
-                    <input type="text" id="input2" name="input2" required>
                 </div>
     
                 <div class="form-group">
@@ -59,50 +62,15 @@
             </div>
         </div>
 
+
         <script>
-            const userType = localStorage.getItem('userType');
-            function generateNavbar() {
-                const navbar = document.getElementById('navbar');
-
-                if (userType === 'client') {
-                    navbar.innerHTML = `
-                        <li><a href="homePage.html">Look Up</a></li>
-                        <li><a href="myMeds.html">My Products</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropbtn">My Profile</a>
-                            <div class="dropdown-content">
-                                <a href="profile.html">View Profile</a>
-                                <a href="User.html">Logout</a>
-                            </div>
-                        </li>
-                `;
-                } else if (userType === 'manufacturer') {
-                    navbar.innerHTML = `
-                        <li><a href="homePage.html">Look Up</a></li>
-                        <li><a href="track.html">Track</a></li>
-                        <li><a href="report.html">Report</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropbtn">My Profile</a>
-                            <div class="dropdown-content">
-                                <a href="profile.html">View Profile</a>
-                                <a href="User.html">Logout</a>
-                            </div>
-                        </li>
-                `;
-                }
-            }
-            generateNavbar();
-
             document.getElementById('userForm').addEventListener('submit', function(event) {
                 event.preventDefault();
-                const input1 = document.getElementById('input1').value.trim(); // Trim whitespace
-                const input2 = document.getElementById('input2').value.trim(); // Trim whitespace
+                const input1 = document.getElementById('input1').value.trim(); 
                 const fileInput = document.getElementById('fileInput').files[0];
         
-                // Check if at least one input is filled
-                if (input1 || input2 || fileInput) {
+                if (input1 || fileInput) {
                     alert('Form Submitted Successfully');
-                    // You can handle the form data or send it to a server here
                 } else {
                     alert('Please fill at least one field or select a file.');
                 }

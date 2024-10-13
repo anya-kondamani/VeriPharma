@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Product Report</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/manufacturerReport.css">
+        <link rel="stylesheet" href="styles/theme.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="manufacturerRegister.html">Register Product</a></li>
+                <li><a href="manufacturerReport.html">Report Product</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">My Profile</a>
+                    <div class="dropdown-content">
+                        <a href="manufacturerProfile.html">View Profile</a>
+                        <a href="User.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="report-container">
+            <h2>Report Product Issue</h2>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label for="serialOrBatch">Serial # or Batch #:</label>
+                    <input type="text" id="serialOrBatch" name="serialOrBatch" placeholder="Enter Serial or Batch number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="problemDetails">Problem Details (Optional):</label>
+                    <textarea id="problemDetails" name="problemDetails" rows="4" placeholder="Describe the issue in detail"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit">Submit Report</button>
+                </div>
+            </form>
+        </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <script>
+            document.getElementById('reportForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const serialOrBatch = document.getElementById('serialOrBatch').value.trim();
+                const problemDetails = document.getElementById('problemDetails').value.trim();
+
+                if (!serialOrBatch) {
+                    alert('Please provide a valid Serial # or Batch #.');
+                    return;
+                }
+
+                alert('Report submitted successfully!');
+                // Here you can send the form data to your server for further processing.
+                console.log({
+                    serialOrBatch,
+                    problemDetails: problemDetails || 'No additional details provided'
+                });
+
+                // Reset the form
+                document.getElementById('reportForm').reset();
+            });
+        </script>
+        <script src="" async defer></script>
+    </body>
+</html>
