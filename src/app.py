@@ -14,24 +14,25 @@ app = Flask(__name__)
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
-    first_name = data.get('first_name')
-    middle_name = data.get('middle_name')
-    last_name = data.get('last_name')
+    user_type = data.get('user_type')
+
+    if user_type not in ['client', 'retailer', 'manufacturer']:
+        return jsonify({'message': 'Invalid user type'}), 400
+
     username = data.get('username')
     password = data.get('password')
     confirm_password = data.get('confirm_password')
-    insurance_carrier = data.get('insurance_carrier')
-    wallet_address = data.get('wallet_address')  # This should be provided after wallet connection
+    wallet_address = data.get('wallet_address')
 
-    # Validate input data
-    required_fields = [first_name, last_name, username, password, confirm_password, insurance_carrier, wallet_address]
+    # Common field validation
+    required_fields = [username, password, confirm_password, wallet_address]
     if not all(required_fields):
         return jsonify({'message': 'All fields are required'}), 400
 
     if password != confirm_password:
         return jsonify({'message': 'Passwords do not match'}), 400
 
-    # Check if the username or email already exists
+    # Check if the username already exists
     existing_user = supabase.table('users').select('*').eq('username', username).execute().data
     if existing_user:
         return jsonify({'message': 'Username already exists'}), 400
@@ -39,17 +40,82 @@ def signup():
     # Hash the password
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-    # Insert the new user into the Supabase users table
-    response = supabase.table('users').insert({
-        'first_name': first_name,
-        'middle_name': middle_name,
-        'last_name': last_name,
+    # Prepare the data to insert based on user type
+    user_data = {
+        'user_type': user_type,
         'username': username,
-        'email': data.get('email'),  # If email is still required
         'password_hash': hashed_password.decode('utf-8'),
-        'insurance_carrier': insurance_carrier,
         'wallet_address': wallet_address
-    }).execute()
+    }
+
+    if user_type == 'client':
+        # Client-specific fields
+        first_name = data.get('first_name')
+        middle_name = data.get('middle_name')
+        last_name = data.get('last_name')
+        insurance_carrier = data.get('insurance_carrier')
+
+        client_required_fields = [first_name, last_name, insurance_carrier]
+        if not all(client_required_fields):
+            return jsonify({'message': 'All client fields are required'}), 400
+
+        user_data.update({
+            'first_name': first_name,
+            'middle_name': middle_name,
+            'last_name': last_name,
+            'insurance_carrier': insurance_carrier
+        })
+
+    elif user_type == 'retailer':
+        # Retailer-specific fields
+        retailer_name = data.get('retailer_name')
+        business_address = data.get('business_address')
+        business_phone = data.get('business_phone')
+        business_email = data.get('business_email')
+        tax_id = data.get('tax_id')
+        business_license = data.get('business_license')
+        industry = data.get('industry')
+
+        retailer_required_fields = [retailer_name, business_address, business_phone, business_email, tax_id]
+        if not all(retailer_required_fields):
+            return jsonify({'message': 'All retailer fields are required'}), 400
+
+        user_data.update({
+            'retailer_name': retailer_name,
+            'business_address': business_address,
+            'business_phone': business_phone,
+            'business_email': business_email,
+            'tax_id': tax_id,
+            'business_license': business_license,
+            'industry': industry
+        })
+
+    elif user_type == 'manufacturer':
+        # Manufacturer-specific fields
+        manufacturer_name = data.get('manufacturer_name')
+        company_address = data.get('company_address')
+        company_phone = data.get('company_phone')
+        company_email = data.get('company_email')
+        tax_id = data.get('tax_id')
+        business_license = data.get('business_license')
+        product_category = data.get('product_category')
+
+        manufacturer_required_fields = [manufacturer_name, company_address, company_phone, company_email, tax_id]
+        if not all(manufacturer_required_fields):
+            return jsonify({'message': 'All manufacturer fields are required'}), 400
+
+        user_data.update({
+            'manufacturer_name': manufacturer_name,
+            'company_address': company_address,
+            'company_phone': company_phone,
+            'company_email': company_email,
+            'tax_id': tax_id,
+            'business_license': business_license,
+            'product_category': product_category
+        })
+
+    # Insert the new user into the Supabase users table
+    response = supabase.table('users').insert(user_data).execute()
 
     if response.data:
         return jsonify({'message': 'User created successfully'}), 201
