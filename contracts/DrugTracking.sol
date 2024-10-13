@@ -86,14 +86,10 @@ contract DrugTracking {
         emit DrugCreated(_serialNumber, _batchId, msg.sender);
     }
 
-    function transferDrug(string memory _serialNumber, address _newOwner, uint _supplyNumber) public onlyOwner(_serialNumber) {
+    function transferDrug(string memory _serialNumber, address _newOwner) public onlyOwner(_serialNumber) {
         Drug storage drug = drugs[_serialNumber];
-        Batch memory batch = batches[drug.batchId];
+       // Batch memory batch = batches[drug.batchId];
 
-        if (batch.supplyNumber != _supplyNumber) {
-            emit SupplyNumberAlert(drug.batchId, _supplyNumber);
-            return;
-        }
         drug.previousOwners.push(drug.currentOwner);
         drug.currentOwner = _newOwner;
         drugHistory[_serialNumber].push(_newOwner);

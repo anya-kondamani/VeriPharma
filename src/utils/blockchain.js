@@ -988,33 +988,6 @@ const eventLoggingAddress = "0x6E5181fd4dd6cd9a2C1A95917dc57E80f1a65636";  // Re
 const registrationAddress = "0x6e13c3dC45083a4C838421a1F684c37949a4D082";  // Replace with actual deployed address
 const drugVerificationAddress = "0x94cCAd4e39c8aca6338a88d443F170DeA783F144";  // Replace with actual deployed address
 
-/*
-async function connectToMetaMask() {
-    if (window.ethereum) {
-        try {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const account = accounts[0];
-            document.getElementById("accountDisplay").innerText = `Connected Account: ${account}`;
-        } catch (error) {
-            console.error("User denied MetaMask connection:", error);
-        }
-    } else {
-        alert("Please install MetaMask to interact with this dApp.");
-    }
-}
-
-
-async function connectToMetaMask() {
-    if (window.ethereum) {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        return signer;
-    } else {
-        console.log("MetaMask is not installed");
-        return null;
-    }
-}*/
 
 
 export async function connectToMetaMask() {
@@ -1028,7 +1001,6 @@ export async function connectToMetaMask() {
         return null;
     }
 }
-
 
 
 export async function registerStakeholder(role) {
@@ -1064,6 +1036,8 @@ export async function getStakeholderDetails(stakeholderAddress) {
     }
 }
 
+
+
 export async function createDrug(serialNumber, batchId) {
     const signer = await connectToMetaMask();
     if (!signer) return;
@@ -1079,6 +1053,37 @@ export async function createDrug(serialNumber, batchId) {
     }
 }
 
+export async function createBatch(batchId, supplyNumber, manufactureDate, expirationDate) {
+    const signer = await connectToMetaMask();
+    if (!signer) return;
+
+    const contract = new ethers.Contract(drugTrackingAddress, drugTrackingABI, signer);
+
+    try {
+        const tx = await contract.createBatch(batchId, supplyNumber, manufactureDate, expirationDate);
+        await tx.wait();
+        alert(`Batch created with ID: ${batchId}`);
+    } catch (error) {
+        console.error("Error creating batch:", error);
+    }
+}
+
+//export async function drugTransfer(serialNumber, newOwner) 
+export async function drugTransfer(serialNumber, newOwner) 
+{
+    const signer = await connectToMetaMask();
+    if (!signer) return;
+
+    const contract = new ethers.Contract(drugTrackingAddress, drugTrackingABI, signer);
+
+    try {
+        const tx = await contract.transferDrug(serialNumber, newOwner);
+        await tx.wait();
+        alert(`Drug transferred to: ${newOwner}`);
+    } catch (error) {
+        console.error("Error transferring drug:", error);
+    }
+}
 
 export async function getDrugDetails(serialNumber) {
     const signer = await connectToMetaMask();
@@ -1140,65 +1145,6 @@ export async function verifyDrug(serialNumber) {
       console.error("Error verifying drug:", error);
       return false;  // Return false if there is an error
   }
-}
-
-
-export async function flagDrug(serialNumber) {
-    const signer = await connectToMetaMask();
-    if (!signer) return;
-
-    const contract = new ethers.Contract(drugVerificationAddress, drugVerificationABI, signer);
-
-    try {
-        const tx = await contract.flagDrug(serialNumber);
-        await tx.wait();
-        alert(`Drug flagged as faulty: ${serialNumber}`);
-    } catch (error) {
-        console.error("Error flagging drug:", error);
-    }
-}
-
-export async function isDrugVerified(serialNumber) {
-    const signer = await connectToMetaMask();
-    if (!signer) return;
-
-    const contract = new ethers.Contract(drugVerificationAddress, drugVerificationABI, signer);
-
-    try {
-        const verified = await contract.isDrugVerified(serialNumber);
-        console.log(`Drug ${serialNumber} verified status:`, verified);
-        return verified;
-    } catch (error) {
-        console.error("Error checking drug verification:", error);
-    }
-}
-
-export async function isDrugFlagged(serialNumber) {
-    const signer = await connectToMetaMask();
-    if (!signer) return;
-
-    const contract = new ethers.Contract(drugVerificationAddress, drugVerificationABI, signer);
-
-    try {
-        const flagged = await contract.isDrugFlagged(serialNumber);
-        console.log(`Drug ${serialNumber} flagged status:`, flagged);
-        return flagged;
-    } catch (error) {
-        console.error("Error checking drug flagged status:", error);
-    }
-}
-
-// UI interaction for displaying drug details
-function displayDrugDetails(details) {
-    const [batchId, currentOwner, isVerified, isBatchFaulty, supplyNumber] = details;
-    // Update your HTML to display these details on the web app
-    document.getElementById("drugDetails").innerHTML = `
-        <p>Batch ID: ${batchId}</p>
-        <p>Current Owner: ${currentOwner}</p>
-        <p>Is Verified: ${isVerified}</p>
-        <p>Is Batch Faulty: ${isBatchFaulty}</p>
-        <p>Supply Number: ${supplyNumber}</p>
-    `;
 }
 
 //Should be boolean
